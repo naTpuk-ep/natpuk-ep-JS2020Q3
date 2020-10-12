@@ -1,9 +1,4 @@
 
-.container{
-	max-width: 1200px;
-	margin: 0 auto;
-}
-
 .hero{
 	background: $gradient;
 	margin-top: -120px;
@@ -20,7 +15,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  max-height: 321px;
+  height: 321px;
 	margin-top: 223px;
 	max-width: 460px;
 }
@@ -76,7 +71,7 @@
 }
 
 .about__img{
-	max-width: 300px;
+	height: fit-content;
 	display: flex;
 }
 
@@ -198,12 +193,12 @@
 
 .help__items-container__5{
 	margin-top: 60px;
-	grid-template-columns: max-content max-content max-content max-content max-content;  
+	grid-template-columns: repeat(5, max-content);  
 }
 
 .help__items-container__4{
 	margin-top: 55px;
-	grid-template-columns: max-content max-content max-content max-content;  
+	grid-template-columns: repeat(4, max-content);  
 }
 
 .help__help-item{
@@ -269,16 +264,97 @@
 	}
 }
 
-header, main, footer {
-	max-width: 1280px;
-	margin: 0 auto;
-	justify-content: center;
-}
-
 // resp
 
-// @media screen and (max-width: 1200px) {
-// 	.container {
-// 		width: 960px;
-// 	}
-// }
+@media screen and (max-width: 1280px) {
+
+	.container{
+		overflow: hidden;
+	}
+
+	.hero__wrapper{
+		align-items: center;
+  	flex-direction: column;
+	}
+
+	.hero__btn{
+		align-self: center;
+	}
+
+	.hero__img{
+		margin-left: 139px;
+		margin-top: 100px;
+		img{
+			width: 569px;
+		}
+	}
+
+	.hero__content{
+		margin-top: 60px;
+		min-height: 323px;
+	}
+
+	.about__wrapper{
+		flex-direction: column-reverse;
+		margin: 80px 0 100px;
+		align-items: center;
+	}
+
+	.about__content{
+		min-height: 380px;
+		max-width: 436px;
+		margin: 0;
+		margin-bottom: 80px;
+	}
+
+	.friends__slider-nav{
+		width: 708px;
+	}
+
+	.woody{
+		display: none;
+	}
+
+	.help__wrapper{
+		max-width: 630px;
+  	margin: 0 auto;
+	}
+
+	.friends__looking-for-house{
+		padding: 0 64px;
+	}
+
+	.help__items-container{
+		// max-width: 630px;
+		grid-template-columns: repeat(3, 1fr);
+		row-gap: 55px;
+		column-gap: 60px;
+	}
+
+	.help__items-container__4{
+		margin-top: -113px;
+		.help__help-item{
+			&:nth-child(1){
+				grid-column-start: 3;
+			}
+		}
+	}
+
+	.addition__wrapper{
+		flex-direction: column-reverse;
+	}
+
+	.addition__content{
+		height: 282px;
+		margin: 0 0 60px;
+		p{
+			line-height: 18px;
+		}
+	}
+
+	.addition__img{
+		max-height: 261px;
+	}
+
+}
+

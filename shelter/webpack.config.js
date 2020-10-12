@@ -5,6 +5,10 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
 
+	resolve: {
+		fallback: { "path": require.resolve("path-browserify") }
+	},
+
 	devServer: {
     port: 3000
   },
@@ -46,7 +50,11 @@ module.exports = {
         test: /\.(png|jpe?g|gif)$/i,
         use: [
           {
-						loader: 'file-loader'
+						loader: 'file-loader',
+						options: {
+							name: '[path][name].[ext]',
+							// publicPath: './src/assets'
+						},
 					},
         ],
       },

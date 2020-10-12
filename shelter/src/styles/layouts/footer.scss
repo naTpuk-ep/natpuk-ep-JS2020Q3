@@ -8,6 +8,12 @@ footer{
 	justify-content: space-between;
 }
 
+.footer__content-wrapper{
+	width: 740px;
+	display: flex;
+	justify-content: space-between;
+}
+
 .footer__content{
 	padding-top: 16px;
 	padding-bottom: 60px;
@@ -29,4 +35,25 @@ footer{
 		margin-right: 20px;
 		min-width: 22px;
 	}
+}
+
+@media screen and (max-width: 1280px) {
+
+	.footer__wrapper{
+		flex-direction: column;
+		align-items: center;
+		padding-top: 30px;
+	}
+
+	.footer__content-wrapper{
+		justify-content: space-around;
+		width: 100%;
+		margin-bottom: 65px;
+	}
+
+	.footer__content{
+		padding: 0;
+		min-height: 234px;
+	}
+
 }

@@ -124,3 +124,9 @@ header{
 		color: #fff;
 	}
 }
+
+@media screen and (max-width: 1280px) {
+	header{
+		padding-top: 30px;
+	}
+}
