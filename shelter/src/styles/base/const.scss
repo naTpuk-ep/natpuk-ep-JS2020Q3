@@ -1,0 +1,60 @@
+*{
+	font-family: Arial;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-o-box-sizing: border-box;
+}
+
+p, a {
+	text-decoration: none;
+	font-family: arial;
+	font-size: 15px;
+}
+
+p{
+	line-height: 160%;
+	color: $dark;
+}
+
+h1,h2,h3,h4,h5{
+	font-family: Georgia;
+	font-weight: normal;
+}
+
+h1{
+	font-style: normal;
+	font-weight: normal;
+	font-size: 32px;
+	line-height: 110%;
+	display: flex;
+	align-items: center;
+	letter-spacing: 0.06em;
+}
+
+h3{
+	font-size: 35px;
+	line-height: 130%;
+	display: flex;
+	align-items: center;
+	letter-spacing: 0.06em;
+	color: $dark;
+}
+
+h4{
+	font-style: normal;
+	font-size: 20px;
+	line-height: 115%;
+	letter-spacing: 0.06em;
+}
+
+h5{
+	color: $dark;
+	font-size: 15px;
+	line-height: 110%;
+	display: flex;
+	align-items: center;
+	letter-spacing: 0.06em;
+}

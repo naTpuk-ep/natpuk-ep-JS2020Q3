@@ -1,0 +1,32 @@
+footer{
+	background: $gradient;
+}
+
+.footer__wrapper{
+	padding-top: 40px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.footer__content{
+	padding-top: 16px;
+	padding-bottom: 60px;
+	display: flex;
+	justify-content: space-between;
+	color: $primary;
+	max-width: 302px;
+	display: flex;
+	flex-direction: column;
+	h3{
+		color: white;
+	}
+	h4{
+		display: flex;
+		align-items: center;
+		color: $primary;
+	}
+	svg{
+		margin-right: 20px;
+		min-width: 22px;
+	}
+}
