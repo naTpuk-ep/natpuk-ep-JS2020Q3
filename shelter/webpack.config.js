@@ -52,14 +52,11 @@ module.exports = {
           {
 						loader: 'file-loader',
 						options: {
-							name: '[path][name].[ext]',
-							// publicPath: './src/assets'
+							name: 'assets/[contenthash].[ext]',
 						},
 					},
         ],
       },
     ],
   }
-	
-	
 }

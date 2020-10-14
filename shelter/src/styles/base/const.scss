@@ -1,4 +1,9 @@
 
+main, header, footer {
+	max-width: 1280px;
+	margin: 0 auto;
+}
+
 .container{
 	max-width: 1200px;
 	margin: 0 auto;
@@ -65,8 +70,33 @@ h5{
 	letter-spacing: 0.06em;
 }
 
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1279px) {
 	.container {
-		max-width: 708px;
+		max-width: 100%;
+		margin: 0 30px;
+	}
+}
+
+@media screen and (max-width: 767px){
+	.container {
+		margin: 0 10px;
+	}
+
+	h2, h3{
+		font-size: 25px;
+		letter-spacing: 0.06em;
+		text-align: center;
+	}
+
+	h4{
+		font-size: 15px;
+		line-height: 110%;
+	}
+
+	h5{
+		font-family: arial;
+		font-size: 15px;
+		line-height: 160%;
+		letter-spacing: 0;
 	}
 }
