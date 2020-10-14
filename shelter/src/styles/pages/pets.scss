@@ -1,0 +1,128 @@
+header{
+	padding: 0;
+	position: sticky;
+	top: 0px;
+	background-color: #fff;
+	z-index: 3;
+	h1{
+		color: $dark3xl;
+	}
+}
+
+.menu{
+	svg{
+		color: #000;
+	}
+}
+
+.logo__subtitle{
+	color: $dark3xl;
+}
+.list__link{
+	color: $dark3xl;
+}
+
+.list__link-disabled{
+	color: $dark;
+	&:hover{
+		color: $dark3xl;
+	}
+}
+
+.header__wrapper{
+	display: flex;
+  margin: 0 auto;
+  justify-content: space-between;
+  height: 120px;
+  align-items: center;
+}
+
+.friends__looking-for-house{
+	display: grid;
+	grid-template-columns: repeat(auto-fill, 270px);
+	justify-content: space-between;
+	row-gap: 30px;
+	margin: 15px 0;
+}
+
+
+.friends__title{
+	margin-bottom: 45px;
+}
+
+.friends__slider-nav{
+	position: relative;
+	padding-top: 45px;
+	width: 340px;
+	margin: 0 auto;
+}
+
+.friends__slider-btn{
+	font-size: 20px;
+	line-height: 23px;
+	letter-spacing: 0.06em;
+	font-family: Georgia;
+	font-weight: 400;
+}
+
+.friends__slider-btn-disabled{
+	&:disabled{
+		border-color: $darkC;
+		color: $darkC;
+		cursor: auto;
+		&:hover{
+			background: #fff;
+		}
+	}
+}
+
+
+@media screen and (max-width: 1279px){
+
+	header{
+		padding: 10px 0;
+		top: 0;
+		margin: 20px 0;
+	}
+
+	.header__wrapper{
+		height: 60px;
+	}
+
+	.friends__looking-for-house{
+		max-height: 1365px;
+		overflow: hidden;
+		justify-content: space-evenly;
+		margin: 15px 20px;
+	}
+
+	.friends__title{
+		margin-bottom: 15px;
+	}
+
+	.friends__slider-nav{
+		padding-top: 25px;
+	}
+
+	.friends__wrapper{
+		padding-bottom: 75px;
+	}
+}
+
+@media screen and (max-width: 767px){
+	.friends__title{
+		margin: 0 auto 28px;
+		h3{
+			width: auto;
+		}
+	}
+
+	.friends__slider-nav{
+		width: 100%;
+		justify-content: space-between;
+	}
+
+	.friends__wrapper{
+		padding: 42px 0 ;
+	}
+}

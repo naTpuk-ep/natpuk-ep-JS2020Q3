@@ -1,7 +1,7 @@
 // const fs = require('fs');
-const path = require('path');
+// const path = require('path');
 
-import './styles/style.scss'
+import './styles/mainStyles.scss'
 import startScreenPuppy from './assets/images/start-screen-puppy.png'
 import aboutPets from './assets/images/about-pets.png'
 import katrine from './assets/images/katrine.png'
@@ -33,23 +33,13 @@ const icons = {
 	vitamins
 }
 
-const images = {
-	startScreenPuppy,
-	aboutPets,
-	katrine,
-	jennifer,
-	woody,
-	donation,
-	footer
-}
-
-document.querySelector('.hero__img img').src = images.startScreenPuppy;
-document.querySelector('.about__img img').src = images.aboutPets;
-document.querySelector('.katrine img').src = images.katrine;
-document.querySelector('.jennifer img').src = images.jennifer;
-document.querySelector('.woody img').src = images.woody;
-document.querySelector('.addition__img img').src = images.donation;
-document.querySelector('.footer__img img').src = images.footer;
+document.querySelector('.hero__img img').src = startScreenPuppy;
+document.querySelector('.about__img img').src = aboutPets;
+document.querySelector('.katrine img').src = katrine;
+document.querySelector('.jennifer img').src = jennifer;
+document.querySelector('.woody img').src = woody;
+document.querySelector('.addition__img img').src = donation;
+document.querySelector('.footer__img img').src = footer;
 
 const imgName = (name) => {
 	return name.split('').map((item, i) => i === 0 ? item.toUpperCase() : item).join('').replace(/\-/g, ' ').replace(/\sor\s/g, ' / ');

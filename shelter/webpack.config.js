@@ -16,19 +16,27 @@ module.exports = {
 	mode: 'development', //or production default
 
 	entry: {
-		main: './src/index.js'
+		index: './src/index.js',
+		pets: './src/pets.js'
 	},
 
 
 	output: {
-		filename: 'index.js',
+		filename: '[name].js',
 		path: path.resolve(__dirname, 'dist')
 	},
 
 	plugins: [
 		new HtmlWebpackPlugin({ // подключение html
-			template: path.resolve(__dirname, 'src/index.html')
-	}),
+			filename: "index.html",
+			template: path.resolve(__dirname, 'src/index.html'),
+			chunks: ["index"]
+		}),
+		new HtmlWebpackPlugin({
+			filename: "pets.html",
+			template: path.resolve(__dirname, 'src/pets.html'),
+			chunks: ["pets"]
+		}),
 
 		new CleanWebpackPlugin()
 
