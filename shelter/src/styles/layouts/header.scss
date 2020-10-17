@@ -11,6 +11,8 @@ header{
 .logo{
 	display: flex;
 	flex-direction: column;
+	z-index: 1;
+	opacity: 1;
 }
 
 .logo__title{
@@ -33,9 +35,6 @@ header{
 .menu{
 	display: flex;
 	width: 443px;
-	svg{
-		display: none;
-	}
 }
 
 .list{
@@ -77,19 +76,23 @@ header{
 
 @media screen and (max-width: 767px){
 
+	header{
+		z-index: 4;
+	}
+
 	.header__wrapper{
 		align-items: center;
 	}
 
-	.list{
+	.menu{
 		display: none;
 	}
-
-	.menu{
-		margin-right: 43px;
-		max-width: fit-content;
-		svg{
-			display: block;
-		}
+	
+	.burger-menu{
+		position: absolute;
+		top: 0;
+		right: 0;
+		padding-top: 10px;
+		margin: 35px 53px 0 0;
 	}
 }

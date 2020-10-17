@@ -16,10 +16,10 @@ module.exports = {
 	mode: 'development', //or production default
 
 	entry: {
-		index: './src/index.js',
-		pets: './src/pets.js'
+		index: './src/js/index.js',
+		pets: './src/js/pets.js',
+		// images: './src/js/images.js'
 	},
-
 
 	output: {
 		filename: '[name].js',
