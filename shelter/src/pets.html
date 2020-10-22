@@ -6,6 +6,13 @@
 	<title>Shelter</title>
 </head>
 <body>
+	<div class="burger-menu">
+		<svg width="30" height="22" viewBox="0 0 30 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<line y1="21" x2="30" y2="21" stroke="black" stroke-width="2"/>
+			<line y1="11" x2="30" y2="11" stroke="black" stroke-width="2"/>
+			<line y1="1" x2="30" y2="1" stroke="black" stroke-width="2"/>
+		</svg>
+	</div>
 	<header>
 		<div class="container">
 			<div class="header__wrapper">
@@ -39,71 +46,79 @@
 					<div class="friends__title">
 						<h3>Our friends who<br>are looking for a house</h3>
 					</div>
-					<div class="friends__looking-for-house">
-						<div class="friends__looking-for-house__pets katrine">
-							<img src="" alt="">
-							<p>Katrine</p>
-							<button class="btn friends__looking-for-house__btn">Learn more</button>
-						</div>
-						<div class="friends__looking-for-house__pets jennifer">
-							<img src="" alt="">
-							<p>Jennifer</p>
-							<button class="btn friends__looking-for-house__btn">Learn more</button>
-						</div>
-						<div class="friends__looking-for-house__pets woody">
-							<img src="" alt="">
-							<p>Woody</p>
-							<button class="btn friends__looking-for-house__btn">Learn more</button>
-						</div>
-						<div class="friends__looking-for-house__pets sophia">
-							<img src="" alt="">
-							<p>Sophia</p>
-							<button class="btn friends__looking-for-house__btn">Learn more</button>
-						</div>
-						<div class="friends__looking-for-house__pets timmy">
-							<img src="" alt="">
-							<p>Timmy</p>
-							<button class="btn friends__looking-for-house__btn">Learn more</button>
-						</div>
-						<div class="friends__looking-for-house__pets charly">
-							<img src="" alt="">
-							<p>Charly</p>
-							<button class="btn friends__looking-for-house__btn">Learn more</button>
-						</div>
-						<div class="friends__looking-for-house__pets scarlett">
-							<img src="" alt="">
-							<p>Scarlett</p>
-							<button class="btn friends__looking-for-house__btn">Learn more</button>
-						</div>
-						<div class="friends__looking-for-house__pets freddie">
-							<img src="" alt="">
-							<p>Freddie</p>
-							<button class="btn friends__looking-for-house__btn">Learn more</button>
+					<div class="friends__looking-for-house__wrapper">
+						<div class="friends__looking-for-house">
+							
+							<div class="friends__looking-for-house__pets" id="katrine">
+								<img src="" alt="">
+								<p>Katrine</p>
+								<button class="btn friends__looking-for-house__btn">Learn more</button>
+							</div>
+							<div class="friends__looking-for-house__pets" id="jennifer">
+								<img src="" alt="">
+								<p>Jennifer</p>
+								<button class="btn friends__looking-for-house__btn">Learn more</button>
+							</div>
+							<div class="friends__looking-for-house__pets" id="woody">
+								<img src="" alt="">
+								<p>Woody</p>
+								<button class="btn friends__looking-for-house__btn">Learn more</button>
+							</div>
+							<div class="friends__looking-for-house__pets" id="sophia">
+								<img src="" alt="">
+								<p>Sophia</p>
+								<button class="btn friends__looking-for-house__btn">Learn more</button>
+							</div>
+							<div class="friends__looking-for-house__pets" id="timmy">
+								<img src="" alt="">
+								<p>Timmy</p>
+								<button class="btn friends__looking-for-house__btn">Learn more</button>
+							</div>
+							<div class="friends__looking-for-house__pets" id="charly">
+								<img src="" alt="">
+								<p>Charly</p>
+								<button class="btn friends__looking-for-house__btn">Learn more</button>
+							</div>
+							<div class="friends__looking-for-house__pets" id="scarlett">
+								<img src="" alt="">
+								<p>Scarlett</p>
+								<button class="btn friends__looking-for-house__btn">Learn more</button>
+							</div>
+							<div class="friends__looking-for-house__pets" id="freddie">
+								<img src="" alt="">
+								<p>Freddie</p>
+								<button class="btn friends__looking-for-house__btn">Learn more</button>
+							</div>
+
 						</div>
 					</div>
 					<div class="friends__slider-nav">
-						<button class="btn friends__looking-for-house__btn friends__slider-btn friends__slider-btn-disabled" disabled>
-							<svg width="25" height="11" viewBox="0 0 25 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<button class="btn friends__looking-for-house__btn friends__slider-btn friends__slider-btn-disabled" id="first" disabled>
+							<!-- <svg width="25" height="11" viewBox="0 0 25 11" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path d="M9.94687 10.7852L0.913671 6.08789V4.98438L9.94687 0.287109V1.625L2.43711 5.53125L9.94687 9.44727V10.7852ZM24.018 10.7852L14.9848 6.08789V4.98438L24.018 0.287109V1.625L16.5082 5.53125L24.018 9.44727V10.7852Z" fill="#CDCDCD"/>
-							</svg>								
+							</svg>								 -->
+							<<
 						</button>
-						<button class="btn friends__looking-for-house__btn friends__slider-btn friends__slider-btn-disabled" disabled>
-							<svg width="10" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<button class="btn friends__looking-for-house__btn friends__slider-btn friends__slider-btn-disabled" id="prev" disabled>
+							<!-- <svg width="10" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path d="M9.98242 10.7852L0.949219 6.08789V4.98438L9.98242 0.287109V1.625L2.47266 5.53125L9.98242 9.44727V10.7852Z" fill="#CDCDCD"/>
-							</svg>								
+							</svg>								 -->
+							<
 						</button>
-						<button class="btn friends__slider-btn" active>
+						<button class="btn friends__slider-btn" id="current" disabled>
 							1
 						</button>
-						<button class="btn friends__looking-for-house__btn friends__slider-btn">
-							<svg width="10" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<button class="btn friends__looking-for-house__btn friends__slider-btn" id="next">
+							<!-- <svg width="10" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path d="M9.04102 6.08789L0.0078125 10.7852V9.44727L7.51758 5.53125L0.0078125 1.625V0.287109L9.04102 4.98438V6.08789Z" fill="#292929"/>
-							</svg>	
+							</svg>	 -->
+							>
 						</button>
-						<button class="btn friends__looking-for-house__btn friends__slider-btn">
-							<svg width="25" height="11" viewBox="0 0 25 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<button class="btn friends__looking-for-house__btn friends__slider-btn" id="last">
+							<!-- <svg width="25" height="11" viewBox="0 0 25 11" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path d="M10.0055 6.08789L0.972265 10.7852V9.44727L8.48203 5.53125L0.972265 1.625V0.287109L10.0055 4.98438V6.08789ZM24.0766 6.08789L15.0434 10.7852V9.44727L22.5531 5.53125L15.0434 1.625V0.287109L24.0766 4.98438V6.08789Z" fill="#292929"/>
-							</svg>
+							</svg> -->
+							>>
 						</button>
 					</div>
 				</div>
@@ -172,15 +187,11 @@
 	<div class="filter">
 	</div>
 
+	<div class="popup-filter">
+	</div>
+
 	<!-- slider-menu -->
 
-	<div class="burger-menu">
-		<svg width="30" height="22" viewBox="0 0 30 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-			<line y1="21" x2="30" y2="21" stroke="#F1CDB3" stroke-width="2"/>
-			<line y1="11" x2="30" y2="11" stroke="#F1CDB3" stroke-width="2"/>
-			<line y1="1" x2="30" y2="1" stroke="#F1CDB3" stroke-width="2"/>
-		</svg>
-	</div>
 
 	<div class="slider-menu">
 		<a href="./" class="logo menu-logo">
@@ -201,6 +212,31 @@
 				<a class="list__link list__link-disabled">Contacts</a>
 			</li>
 		</ul>
+	</div>
+
+	
+	<!-- popup -->
+
+	<div class="popup">
+		<button class="btn friends__looking-for-house__btn friends__slider-btn" id="closeModal">
+			<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path fill-rule="evenodd" clip-rule="evenodd" d="M7.42618 6.00003L11.7046 1.72158C12.0985 1.32775 12.0985 0.689213 11.7046 0.295433C11.3108 -0.0984027 10.6723 -0.0984027 10.2785 0.295433L5.99998 4.57394L1.72148 0.295377C1.32765 -0.098459 0.68917 -0.098459 0.295334 0.295377C-0.0984448 0.689213 -0.0984448 1.32775 0.295334 1.72153L4.57383 5.99997L0.295334 10.2785C-0.0984448 10.6723 -0.0984448 11.3108 0.295334 11.7046C0.68917 12.0985 1.32765 12.0985 1.72148 11.7046L5.99998 7.42612L10.2785 11.7046C10.6723 12.0985 11.3108 12.0985 11.7046 11.7046C12.0985 11.3108 12.0985 10.6723 11.7046 10.2785L7.42618 6.00003Z" fill="#292929"/>
+			</svg>				
+		</button>
+		<div class="popup__img">
+			<img src="" alt="">
+		</div>
+		<div class="popup__content">
+			<h3 class="popup__name"></h3>
+			<h4 class="popup__type-breed"></h4>
+			<p></p>
+			<ul class="popup__list">
+				<li id="age"><span></span></li>
+				<li id="inoculations" ><span><b>Inoculations: </b></span></li>
+				<li id="diseases"><span><b>Diseases: </b></span></li>
+				<li id="parasites"><span><b>Parasites: </b></span></li>
+			</ul>
+		</div>
 	</div>
 </body>
 </html>

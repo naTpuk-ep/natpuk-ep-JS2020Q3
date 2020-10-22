@@ -1,96 +1,84 @@
+import petsInfo from '../../assets/pets/pets.json'
+
 export default class Popup {
-	constructor (popupSelector, triggerSelector, dir, display = 'block') {
+	constructor(popupSelector, display = 'flex'){
 		this.popup = document.querySelector(popupSelector);
-		this.trigger = document.querySelector(triggerSelector);
-		this.burgerLines = this.trigger.querySelectorAll('line');
-		this.stroke = this.trigger.querySelector('line').getAttribute('stroke');
-		this.dir = dir;
+		this.triggers = document.querySelectorAll('.friends__looking-for-house__pets');
+		this.closeTrigger = this.popup.querySelector('.btn');
 		this.display = display;
-		this.size = window.getComputedStyle(this.popup)[`${this.dir}`];
-		this.filter = document.querySelector('.filter');
-		this.logos = document.querySelectorAll('.logo');
-		this.body = document.querySelector('body');
-		this.header = document.querySelector('header');
-		this.isShow = false;
-		this.dur = '0.4s';
+		this.filter = document.querySelector('.popup-filter');
+		this.popupImg = this.popup.querySelector('.popup__img img');
+		this.popupName = this.popup.querySelector('.popup__name');
+		this.typeBreed = this.popup.querySelector('.popup__type-breed');
+		this.description = this.popup.querySelector('p');
+		this.age = this.popup.querySelector('#age span');
+		this.inoculations = this.popup.querySelector('#inoculations span');
+		this.diseases = this.popup.querySelector('#diseases span');
+		this.parasites = this.popup.querySelector('#parasites span');
 	}
 
-	// isShow(){
-	// 	return window.getComputedStyle(this.popup).display ==='none' ? false : true;
-	// }
-
-	burgerRotate(){
-		this.trigger.style.transform = this.isShow ? 'rotate(0deg)' : 'rotate(-90deg)';
+	culcScroll(){
+		let div = document.createElement('div');
+		div.style.width = '50px';
+		div.style.height = '50px';
+		div.style.overflowY = 'scroll';
+		div.style.visibility = 'hidden';
+		document.body.appendChild(div);
+		let scrollWidth = div.offsetWidth - div.clientWidth;  // вычисление длины скрола (полная ширина экрана - ширина без скролла)
+		div.remove();
+		return scrollWidth;
 	}
 
-	burgerLinesToggle(){
-		this.burgerLines.forEach(line => {
-			line.setAttribute('stroke', this.isShow ? this.stroke : '#F1CDB3');
-		})
-	}
-
-	logoToggle(){
-		if (this.isShow){
-			this.logos[0].style.cssText = `transition: all ${this.dur} cubic-bezier(0.71, 0.78, 0.49, 1.46) ${this.dur}; transform: scale(1); opacity: 1;`;
-			this.logos[1].style.cssText = `transition: all cubic-bezier(0.48,-0.46, 0.41, 0.4) ${this.dur}; transform: scale(0); opacity: 0;`;
-		}else{
-			this.logos[0].style.cssText = `transition: all cubic-bezier(0.48,-0.46, 0.41, 0.4) ${this.dur}; transform: scale(0); opacity: 0;`;
-			this.logos[1].style.cssText = `transition: all ${this.dur} cubic-bezier(0.71, 0.78, 0.49, 1.46) ${this.dur}; transform: scale(1); opacity: 1`;
-		}
-
-		// this.logos[0].style.transform = this.isShow ? 'scale(1)' : 'scale(0)';
-		// this.logos[1].style.transform = this.isShow ? 'scale(0)' : 'scale(1)';
-
+	createPopup(){
+		this.popupImg.src = this.img;
+		this.pet = petsInfo.find(pet => this.name == pet.name.toLowerCase());
+		this.popupName.innerHTML = this.pet.name;
+		this.typeBreed.innerHTML = `${this.pet.type} - ${this.pet.breed}`
+		this.description.innerHTML = this.pet.description;
+		this.age.innerHTML = `<b>Age: </b>${this.pet.age}`;
+		this.inoculations.innerHTML = `<b>Inoculations: </b>${this.pet.inoculations.join(', ')}`;
+		this.diseases.innerHTML = `<b>Diseases: </b>${this.pet.diseases.join(', ')}`;
+		this.parasites.innerHTML = `<b>Parasites: </b>${this.pet.parasites.join(', ')}`;
 	}
 
 	show(){
-		this.popup.addEventListener('transitionend', ()=> {
-			this.popup.style.transitionDelay = this.dur;
-			this.isShow = !this.isShow;
-		}, {once:true});
-		this.burgerLinesToggle();
-		this.burgerRotate();
-		this.body.style.overflow = 'hidden';
-		this.header.style.background = 'transparent'
+		document.body.style.overflow = 'hidden';
 		this.filter.style.display = 'block';
 		this.popup.style.display = this.display;
 		setTimeout(() => {
-			this.filter.style.background = 'black';
 			this.filter.style.opacity = 0.6;
-			this.popup.style[`${this.dir}`] = 0;
-			this.logoToggle();
+			this.popup.style.opacity = 1;
 		});
+		document.body.style.marginRight = `${this.culcScroll()}px`;
 	}
 
 	hide(){
-		this.popup.addEventListener('transitionstart', () => {
-			console.log('start');
-		}, {once:true});
-		this.popup.addEventListener('transitionend', () =>{
-			this.burgerRotate();
-			this.burgerLinesToggle();
-			this.filter.style.display = 'none';
-			this.filter.style.background = 'none'
-			this.header.style.background = ''
-			this.body.style.overflow = '';
-			this.popup.style.transitionDelay = '0s';
-			this.isShow = !this.isShow;
-			console.log('end');
-		}, {once: true});
-		this.popup.style[`${this.dir}`] = this.size;
+		document.body.style.marginRight = 0;
+		document.body.style.overflow = '';
+		this.popup.style.display = 'none';
+		this.popup.style.opacity = 0;
+		this.filter.style.display = 'none';
 		this.filter.style.opacity = 0;
-		this.logoToggle();
 	}
 
-	bindTriggers(){
-		this.trigger.addEventListener('click', () => {
-			if (!this.isShow) this.show();
-			else this.hide();
-		});
+	bind(){
+		const closeItems = [this.closeTrigger, this.filter];
+		closeItems.forEach(item => {
+			item.addEventListener('click', () => {
+				this.hide();
+			});
+		})
+		this.triggers.forEach(trigger => {
+			trigger.addEventListener('click', () => {
+				this.img = trigger.querySelector('img').src;
+				this.name = trigger.id;
+				this.createPopup();
+				this.show();
+			});
+		})
 	}
 
 	init(){
-		this.trigger.style.display = 'block';
-		this.bindTriggers();
+		this.bind();
 	}
 }

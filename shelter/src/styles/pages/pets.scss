@@ -3,10 +3,10 @@ header{
 	position: sticky;
 	top: 0px;
 	background-color: #fff;
-	z-index: 4;
 	h1{
 		color: $dark3xl;
 	}
+	transition: all ease-in-out;
 }
 
 .logo__subtitle{
@@ -56,7 +56,7 @@ header{
 	line-height: 23px;
 	letter-spacing: 0.06em;
 	font-family: Georgia;
-	font-weight: 400;
+	font-weight: bold;
 }
 
 .friends__slider-btn-disabled{
@@ -88,6 +88,10 @@ header{
 		overflow: hidden;
 		justify-content: space-evenly;
 		margin: 15px 20px;
+	}
+
+	.friends__looking-for-house__pets:nth-child(n+7){
+		display: none
 	}
 
 	.friends__title{
@@ -123,7 +127,32 @@ header{
 	.burger-menu{
 		position: sticky;
 		top: 0;
-		padding-top: 10px;
-		margin-top: 35px;
+		margin: 0;
+		padding: 0;
+		svg{
+			margin-right: 53px;
+			position: absolute;
+			right: 0;
+			margin-top: 25px;
+		}
+	}
+
+	.list__link{
+		color: #fff;
+	}
+	
+	.list__link-active{
+		border-bottom: solid 3px $primary;
+	}
+	
+	.list__link-disabled{
+		color: #CDCDCD;
+		&:hover{
+			color: #fff;
+		}
+	}
+
+	.friends__looking-for-house__pets:nth-child(n+4){
+		display: none
 	}
 }

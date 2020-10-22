@@ -58,7 +58,7 @@
 	cursor: pointer;
 	display: flex;
   align-items: center;
-  justify-content: center;
+	justify-content: center;
 }
 
 .friends__looking-for-house__pets {
@@ -86,6 +86,11 @@
 		font-size: 20px;
 		line-height: 23px;
 		letter-spacing: 0.06em;
+		text-transform: capitalize
+	}
+	img{
+		width: 270px;
+		height: 270px;
 	}
 }
 
@@ -98,7 +103,6 @@
 	}
 }
 
-
 .friends__wrapper{
 	text-align: center;
 	display: flex;
@@ -108,4 +112,48 @@
 	padding-top: 80px;
 	padding-bottom: 100px;
 	position: relative;
+}
+
+@media screen and (max-width: 1279px) {
+	.btn{
+		transition: all linear 0.05s;
+	}
+
+	.btn:hover{
+		background-color: $primary;
+		border-color: $primary;
+	}
+
+	.friends__looking-for-house__btn:hover{
+		background: none;
+	}
+
+	.friends__looking-for-house__pets {
+		cursor: pointer;
+		transition: all ease 0.1s;
+		&:hover{
+			transform: none;
+			box-shadow: none;
+			button{
+					transition: none;
+					background: none;
+					border-color: $primary;
+				}
+			}
+		}
+
+		.btn-onpress{
+			background: $primaryLight;
+			border-color: $primaryLight;
+			// transform: scale(1.05);
+		}
+
+		.friends__looking-for-house__pets-onpress{
+			transform: scale(1.05);
+			box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+			button{
+				background-color: $primaryLight;
+				border-color: $primaryLight;
+			}
+		}
 }

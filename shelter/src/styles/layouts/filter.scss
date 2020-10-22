@@ -1,0 +1,15 @@
+.filter{
+	display: none;
+	background: black;
+	opacity: 0.6;
+	position: fixed;
+	right: 0;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	z-index: 3;
+	transition: all ease-in-out;
+	&:hover{
+		cursor: pointer;
+	}
+}

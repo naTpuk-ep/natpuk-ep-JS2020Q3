@@ -139,14 +139,13 @@
 }
 
 .addition__donation-link{
-	transition: all ease 0.2s;
   max-width: 349px;
   height: 43px;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   border-radius: 9px;
-  background: $primary;
+  // background: $primary;
 	p{
 		font-style: normal;
 		font-family: Georgia;
@@ -229,6 +228,10 @@
 		}
 	}
 
+	// .addition__donation-link{
+	// 	transition: none;
+	// }
+
 	.addition__img{
 		max-height: 261px;
 	}
@@ -237,7 +240,7 @@
 		align-self: center;
 	}
 
-	.woody{
+	.friends__looking-for-house__pets:nth-child(3){
 		display: none;
 	}
 }
@@ -257,6 +260,7 @@
 
 	.hero__title{
 		font-size: 25px;
+		max-width: 80vw;
 	}
 
 	.hero__img{
@@ -300,7 +304,7 @@
 		width: auto;
 	}
 
-	.jennifer{
+	.friends__looking-for-house__pets:nth-child(2){
 		display: none;
 	}
 

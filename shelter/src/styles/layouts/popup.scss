@@ -1,0 +1,150 @@
+.popup-filter{
+	display: none;
+	background: black;
+	opacity: 0;
+	position: fixed;
+	right: 0;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	z-index: 3;
+	transition: all ease-in-out 0.2s;
+	&:hover{
+		cursor: pointer;
+	}
+	&:hover~.popup button{
+		background-color: $primaryLight;
+		border-color: $primaryLight;
+	}
+}
+
+.popup{
+	opacity: 0;
+	position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: #fafafa;
+  margin: auto;
+  width: 900px;
+  height: max-content;
+	z-index: 3;
+	display: none;
+	color: #000;
+	border-radius: 9px;
+	transition: all ease-in-out 0.2s;
+	button{
+		position: absolute;
+		right: 0;
+		background: transparent;
+		margin-top: -52px;
+		margin-right: -46px;
+	}
+}
+
+.popup__name{
+	color: #000;
+	margin-bottom: 10px;
+}
+
+.popup__type-breed{
+	margin-bottom: 40px;
+}
+
+.popup__img img{
+	width: 500px;
+	border-radius: 9px
+}
+
+.popup__content {
+	margin: 50px 20px 0px 29px;
+	p{
+		font-family: Georgia;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 15px;
+		line-height: 110%;
+		letter-spacing: 0.06em;
+		color: #000000;
+	}
+}
+
+.popup__list{
+	height: auto;
+	margin-top: 40px;
+	margin-left: 20px;
+	li{
+		margin-bottom: 10px;
+		font-family: Georgia;
+		font-style: normal;
+		font-size: 15px;
+		line-height: 110%;
+		letter-spacing: 0.06em;
+		color: $primary;
+		span{
+			color: black;
+		}
+	}
+}
+
+@media screen and (max-width: 1279px) {
+	.popup{
+		width: 630px;
+		width: 682px;
+	}
+
+	.popup__img img{
+		width: 350px;
+	}
+
+	.popup__list{
+		li{
+			margin-bottom: 5px;
+		}
+	}
+
+	.popup__content{
+		margin: 10px 9px 0px 11px;
+		p{
+			font-size: 13px;
+		}
+	}
+
+	.popup__name{
+		margin-bottom: 10px;
+	}
+
+	.popup__type-breed{
+		margin-bottom: 20px;
+	}
+}
+
+@media screen and (max-width: 767px) {
+	.popup__img{
+		display: none;
+	}
+
+	.popup{
+		width: 240px;
+	}
+
+	.popup__content{
+		margin: 10px;
+	}
+
+	.popup__list{
+		margin-top: 24px;
+	}
+
+	.popup__list {
+		li{
+			margin-bottom: 6px;
+		}
+	}
+
+	h3, h4{
+		text-align: center;
+		justify-content: center;
+	}
+}
