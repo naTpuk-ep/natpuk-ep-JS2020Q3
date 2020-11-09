@@ -1,0 +1,15 @@
+$wrapperWidth: 800px;
+
+.wrapper{
+	width: $wrapperWidth;
+	height: $wrapperWidth;
+	margin: auto auto;
+	position: relative;
+}
+
+.cell{
+	position: absolute;
+	// width: $wrapperWidth/4;
+	// height: $wrapperWidth/4;
+}
+
