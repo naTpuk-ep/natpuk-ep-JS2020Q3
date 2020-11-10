@@ -1,13 +1,14 @@
 
-import Cell from "./Cell"
+import {randomImage} from './randomIimage';
+import Cell from "./Cell";
 
 export default class GemPuzzle {
 	constructor(dimension){
-		this.main = document.querySelector('main');
-		this.imgSrc = './assets/img/2.jpg';
 		this.dim = dimension;
-		this.wrapper = this.createWrapper();
+		this.imgSrc = randomImage();
 		this.size = 500;
+		this.main = document.querySelector('main');
+		this.wrapper = this.createWrapper();
 		this.main.appendChild(this.wrapper);
 		this.cells = [];
 		this.movements = 0;
