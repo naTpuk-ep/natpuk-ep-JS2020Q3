@@ -2,15 +2,15 @@
 import Cell from "./Cell"
 
 export default class GemPuzzle {
-	constructor(){
+	constructor(dimension){
 		this.main = document.querySelector('main');
-		this.imgSrc = './assets/img/139.jpg';
-		this.dim = 4;
-		this.size = 500;
+		this.imgSrc = './assets/img/2.jpg';
+		this.dim = dimension;
 		this.wrapper = this.createWrapper();
+		this.size = 500;
 		this.main.appendChild(this.wrapper);
 		this.cells = [];
-
+		this.movements = 0;
 		this.init();
 	}
 
@@ -23,10 +23,29 @@ export default class GemPuzzle {
 	shuffle() {
     for (let i = this.cells.length - 1; i > 0; i--) {
 			const j = Math.floor(Math.random() * (i + 1));
-			[this.cells[i], this.cells[j]] = [this.cells[j], this.cells[i]];
-			this.cells[i].setPosition(i);
-			this.cells[j].setPosition(j);
+			this.swap(i, j);
 		}
+	}
+
+	swap(i, j) {
+		[this.cells[i], this.cells[j]] = [this.cells[j], this.cells[i]];
+		this.cells[i].setPosition(i);
+		this.cells[j].setPosition(j);
+		if (this.isAssambled()) {
+			console.log('good');
+		}
+	}
+
+	isAssambled() {
+		return this.cells.every((cell, i) => i === cell.index)
+	}
+
+	findPosition(index) {
+		return this.cells.findIndex(cell => cell.index === index);
+	}
+
+	findEmpty() {
+		return this.cells.findIndex(cell => cell.isEmpty);
 	}
 
 	init() {
@@ -34,6 +53,5 @@ export default class GemPuzzle {
 			this.cells.push(new Cell(this, i));
 		}
 		this.shuffle();
-		console.log(this.cells);
 	}
 }

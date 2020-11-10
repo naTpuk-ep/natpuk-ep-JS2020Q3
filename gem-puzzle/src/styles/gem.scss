@@ -1,4 +1,4 @@
-$wrapperWidth: 800px;
+$wrapperWidth: 500px;
 
 .wrapper{
 	width: $wrapperWidth;
@@ -9,6 +9,7 @@ $wrapperWidth: 800px;
 
 .cell{
 	position: absolute;
+	transition: all ease-in-out .3s;
 	// width: $wrapperWidth/4;
 	// height: $wrapperWidth/4;
 }
