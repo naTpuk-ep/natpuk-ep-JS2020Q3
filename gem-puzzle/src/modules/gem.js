@@ -1,5 +1,5 @@
 
-import {randomImage} from './randomIimage';
+import {randomImage} from "./randomImage";
 import Cell from "./Cell";
 
 export default class GemPuzzle {
@@ -7,7 +7,7 @@ export default class GemPuzzle {
 		this.dim = dimension;
 		this.imgSrc = randomImage();
 		this.size = 500;
-		this.main = document.querySelector('main');
+		this.main = document.querySelector("main");
 		this.wrapper = this.createWrapper();
 		this.main.appendChild(this.wrapper);
 		this.cells = [];
@@ -16,8 +16,8 @@ export default class GemPuzzle {
 	}
 
 	createWrapper() {
-		const div = document.createElement('div');
-		div.classList.add('wrapper');
+		const div = document.createElement("div");
+		div.classList.add("wrapper");
 		return div;
 	}
 
@@ -33,12 +33,12 @@ export default class GemPuzzle {
 		this.cells[i].setPosition(i);
 		this.cells[j].setPosition(j);
 		if (this.isAssambled()) {
-			console.log('good');
+			console.log("div");
 		}
 	}
 
 	isAssambled() {
-		return this.cells.every((cell, i) => i === cell.index)
+		return this.cells.every((cell, i) => i === cell.index);
 	}
 
 	findPosition(index) {
@@ -49,9 +49,19 @@ export default class GemPuzzle {
 		return this.cells.findIndex(cell => cell.isEmpty);
 	}
 
+	bindDrop(cell) {
+		if (cell.isEmpty) {
+			cell.div.ondragover = (e) => e.preventDefault();
+			cell.div.ondrop = () => {
+				this.drop = true;
+			};
+		}
+	}
+
 	init() {
 		for (let i = 0; i < this.dim**2; i++) {
 			this.cells.push(new Cell(this, i));
+			this.bindDrop(this.cells[i]);
 		}
 		this.shuffle();
 	}
