@@ -1,10 +1,12 @@
-$wrapperWidth: 500px;
+$wrapperWidth: 300px;
 
-.wrapper{
+.gem-wrapper{
 	width: $wrapperWidth;
 	height: $wrapperWidth;
+	display: flex;
 	margin: auto auto;
 	position: relative;
+
 }
 
 .cell{

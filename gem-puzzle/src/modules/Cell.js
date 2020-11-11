@@ -96,5 +96,4 @@ export default class Cell  {
 			y: Math.floor(index / this.puzzle.dim)
 		};
 	}
-
 }

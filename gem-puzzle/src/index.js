@@ -1,7 +1,7 @@
 import "./modules/imagesImports";
 import "./styles/main.scss";
-import GemPuzzle from "./modules/Gem";
+import Layout from "./modules/Layout";
 
 window.addEventListener("load", () => {
-	new GemPuzzle(4);
+	new Layout();
 });

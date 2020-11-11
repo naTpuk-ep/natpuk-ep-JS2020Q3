@@ -1,3 +1,48 @@
 * {
 	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
+
+li {
+	list-style-type: none;
+}
+
+button {
+	font-weight: bold;
+	border: none;
+	background: none;
+	cursor: pointer;
+	&:hover{
+		border-bottom: 1px solid black;
+	}
+}	
+
+main {
+	height: 80vh;
+	display: flex;
+}
+
+.start-menu {
+	width: 300px;
+  height: 50vh;
+  box-shadow: 0 0 20px 3px black;
+  margin: auto auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+	ul {
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		justify-content: space-evenly;
+		padding: 1.5rem 0;
+	}
+}
+
