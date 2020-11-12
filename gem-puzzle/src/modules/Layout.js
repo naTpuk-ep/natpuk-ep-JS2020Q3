@@ -26,7 +26,23 @@ export default class Layout {
 		this.exit.addEventListener("click", () => {
 			console.log(localStorage);
 			this.exitHandler();
+		});
+		this.startButtons["continue"].addEventListener("click", () => {
+			this.continueHandler();
 		})
+	}
+
+	continueHandler() {
+		this.startMenu.style.display = "none";
+		this.puzzle = new Gem( +localStorage.dim, {
+			imgSrc: localStorage.imgSrc,
+			cellsIndexes: localStorage.cellsIndexes.split(",").map(index => +index),
+			movements: +localStorage.movements,
+			timer: {min: +localStorage.min, sec: +localStorage.sec}
+		});
+		this.puzzle.setupContinue();
+		this.showtime();
+		this.header.style.display = "";
 	}
 
 	exitHandler() {
@@ -36,7 +52,7 @@ export default class Layout {
 		this.hideBtns(this.sizeButtons);
 		this.showBtns(this.startButtons);
 		this.startMenu.style.display = "";
-
+		console.log(localStorage);
 	}
 
 	stopGame() {
@@ -116,7 +132,8 @@ export default class Layout {
 
 	sizeHandler(size) {
 		this.startMenu.style.display = "none";
-		this.puzzle = new Gem(this , {dim: +size[0]});
+		this.puzzle = new Gem(+size[0]);
+		this.puzzle.setupNew();
 		this.header.style.display = "";
 		this.showtime();
 	}

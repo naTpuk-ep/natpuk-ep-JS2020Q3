@@ -3,28 +3,28 @@ import {randomImage} from "./randomImage";
 import Cell from "./Cell";
 
 export default class Gem {
-	constructor(Layout, {dim = 4, cells = [], movements = 0, timer = { min: 0, sec: 0 }}){
+	constructor(dim = 4, save = {imgSrc: randomImage(), cellsIndexes: [], movements: 0, timer: { min: 0, sec: 0 }}){
 		this.dim = dim;
-		this.imgSrc = randomImage();
+		this.imgSrc = save.imgSrc;
 		this.size = 300;
 		this.main = document.querySelector("main");
 		this.wrapper = this.createWrapper();
 		this.main.appendChild(this.wrapper);
-		this.cells = cells;
-		this.movements = movements;
-		this.setup();
-		this.timer = timer;
+		this.cells = [];
+		this.cellsIndexes = save.cellsIndexes;
+		this.movements = save.movements;
+		this.timer = save.timer;
 		this.setTimer();
 	}
 
 	saveGame() {
 		this.save = {
 			dim: this.dim,
-			cells: this.cells.map(cell => cell.index),
+			cellsIndexes: this.cells.map(cell => cell.index),
 			movements: this.movements,
 			min: this.timer.min,
 			sec: this.timer.sec,
-			img: this.imgSrc,
+			imgSrc: this.imgSrc,
 		};
 		for(let key in this.save) {
 			localStorage.setItem(key, this.save[key]);
@@ -87,7 +87,8 @@ export default class Gem {
 		}
 	}
 
-	setup() {
+	setupNew() {
+		localStorage.clear();
 		for (let i = 0; i < this.dim**2; i++) {
 			this.cells.push(new Cell(this, i));
 			this.bindDrop(this.cells[i]);
@@ -95,7 +96,14 @@ export default class Gem {
 		this.shuffle();
 	}
 
-	init() {
-
+	setupContinue() {
+		for (let i = 0; i < this.dim**2; i++) {
+			this.cells.push(new Cell(this, this.cellsIndexes[i]));
+			this.bindDrop(this.cells[i]);
+		}
+		for (let i = 0; i < this.cells.length; i++) {
+			this.cells[i].setPosition(i);
+		}
+		console.log(this.cells);
 	}
 }
