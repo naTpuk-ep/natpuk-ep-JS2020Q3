@@ -51,7 +51,14 @@ module.exports = {
 				options: {
 					name: 'assets/img/[name].[ext]',
 				},
-      },
+			},
+			{
+        test: /\.mp3$/i,
+				loader: 'file-loader',
+				options: {
+					name: 'assets/[name].[ext]',
+				},
+      }
     ],
   }
 }

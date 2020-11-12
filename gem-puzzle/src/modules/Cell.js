@@ -9,6 +9,7 @@ export default class Cell  {
 		puzzle.wrapper.appendChild(this.div);
 		this.setImage();
 		this.setPosition(this.index);
+		this.sound = document.querySelector("audio");
 	}
 
 	bindTriggers() {
@@ -37,7 +38,9 @@ export default class Cell  {
 		if (this.canSwap()) {
 				this.puzzle.swap(this.currentIndex, this.emptyIndex);
 				this.puzzle.movements ++;
-				console.log(this.puzzle.movements);
+				this.puzzle.layout.movementsElement.textContent = this.puzzle.movements;
+				this.sound.currentTime = 0;
+				this.sound.play();
 			}
 	}
 

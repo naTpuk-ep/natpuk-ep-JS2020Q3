@@ -3,7 +3,8 @@ import {randomImage} from "./randomImage";
 import Cell from "./Cell";
 
 export default class Gem {
-	constructor(dim = 4, save = {imgSrc: randomImage(), cellsIndexes: [], movements: 0, timer: { min: 0, sec: 0 }}){
+	constructor(layout, dim = 4, save = {imgSrc: randomImage(), cellsIndexes: [], movements: 0, timer: { min: 0, sec: 0 }}){
+		this.layout = layout;
 		this.dim = dim;
 		this.imgSrc = save.imgSrc;
 		this.size = 300;
@@ -104,6 +105,7 @@ export default class Gem {
 		for (let i = 0; i < this.cells.length; i++) {
 			this.cells[i].setPosition(i);
 		}
+		this.layout.movementsElement.textContent = this.movements;
 		console.log(this.cells);
 	}
 }
