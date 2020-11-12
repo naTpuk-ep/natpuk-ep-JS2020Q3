@@ -38,7 +38,7 @@ export default class Cell  {
 				this.puzzle.swap(this.currentIndex, this.emptyIndex);
 				this.puzzle.movements ++;
 				console.log(this.puzzle.movements);
-			} 
+			}
 	}
 
 	canSwap() {
@@ -48,8 +48,7 @@ export default class Cell  {
 		const {x: currentX, y: currentY} = this.getXY(this.currentIndex);
 		const {x: emptyX, y: emptyY} = this.getXY(this.emptyIndex);
 
-		return ((currentX === emptyX || currentY === emptyY) && 
-			(Math.abs(currentX - emptyX) === 1 || Math.abs(currentY - emptyY) === 1));
+		return ((currentX === emptyX || currentY === emptyY) && (Math.abs(currentX - emptyX) === 1 || Math.abs(currentY - emptyY) === 1));
 	}
 
 	createDiv() {

@@ -3,28 +3,43 @@ import {randomImage} from "./randomImage";
 import Cell from "./Cell";
 
 export default class Gem {
-	constructor(dimension){
-		this.dim = dimension;
+	constructor(Layout, {dim = 4, cells = [], movements = 0, timer = { min: 0, sec: 0 }}){
+		this.dim = dim;
 		this.imgSrc = randomImage();
 		this.size = 300;
 		this.main = document.querySelector("main");
 		this.wrapper = this.createWrapper();
 		this.main.appendChild(this.wrapper);
-		this.cells = [];
-		this.movements = 0;
+		this.cells = cells;
+		this.movements = movements;
 		this.setup();
-		this.timer = { min: 0, sec: 0 };
+		this.timer = timer;
 		this.setTimer();
 	}
 
+	saveGame() {
+		this.save = {
+			dim: this.dim,
+			cells: this.cells.map(cell => cell.index),
+			movements: this.movements,
+			min: this.timer.min,
+			sec: this.timer.sec,
+			img: this.imgSrc,
+		};
+		for(let key in this.save) {
+			localStorage.setItem(key, this.save[key]);
+		}
+	}
+
 	setTimer() {
-		console.log(this.timer);
-		setTimeout(() => {
+		this.saveGame();
+		this.timerId = setTimeout(() => {
 			this.timer.sec ++;
 			if (this.timer.sec === 60) {
 				this.timer.min ++;
 				this.timer.sec = 0;
 			}
+			clearTimeout(this.timerId)
 			this.setTimer();
 		}, 1000);
 	}
@@ -47,7 +62,7 @@ export default class Gem {
 		this.cells[i].setPosition(i);
 		this.cells[j].setPosition(j);
 		if (this.isAssambled()) {
-			console.log("div");
+			console.log("good");
 		}
 	}
 

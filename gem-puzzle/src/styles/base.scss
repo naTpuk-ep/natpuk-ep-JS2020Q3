@@ -23,6 +23,20 @@ main {
 	display: flex;
 }
 
+time {
+	font-weight: bold;
+  font-size: 20px;
+}
+
+header {
+	margin: 0 auto;
+  height: 20vh;
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
 .start-menu {
 	width: 300px;
   height: 50vh;
