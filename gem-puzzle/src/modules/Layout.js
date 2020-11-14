@@ -26,7 +26,6 @@ export default class Layout {
 			})
 		};
 		this.exit.addEventListener("click", () => {
-			console.log(localStorage);
 			this.exitHandler();
 		});
 		this.startButtons["continue"].addEventListener("click", () => {
@@ -87,13 +86,11 @@ export default class Layout {
 		this.showBtns(this.startButtons);
 		this.startMenu.style.display = "";
 		this.muteElement.style.display = "none";
-		console.log(localStorage);
 	}
 
 	stopGame() {
 		clearTimeout(this.puzzle.timerId);
 		clearTimeout(this.timerId);
-		this.movementsElement.textContent = "";
 	}
 
 	createHeader() {
@@ -169,6 +166,7 @@ export default class Layout {
 
 	sizeHandler(size) {
 		this.startMenu.style.display = "none";
+		this.movementsElement.textContent = "";
 		this.puzzle = new Gem(this, +size[0]);
 		this.puzzle.setupNew();
 		this.header.style.display = "";

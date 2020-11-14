@@ -64,6 +64,8 @@ export default class Gem {
 		this.cells[j].setPosition(j);
 		if (this.isAssambled()) {
 			console.log("good");
+			this.layout.stopGame();
+			localStorage.clear();
 		}
 	}
 
@@ -106,6 +108,5 @@ export default class Gem {
 			this.cells[i].setPosition(i);
 		}
 		this.layout.movementsElement.textContent = this.movements;
-		console.log(this.cells);
 	}
 }
