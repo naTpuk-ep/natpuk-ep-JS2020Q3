@@ -42,12 +42,13 @@ main {
 
 .head {
 	margin: 0 auto;
-	width: 300px;
+	width: 100%;
+	min-height: 30px;
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-end;
 	font-weight: bold;
-	font-size: 20px
+	font-size: 20px;
 }
 
 .start-menu {
@@ -65,12 +66,21 @@ main {
 	}
 }
 
-.mute {
-	width: 300px;
+.foot {
+	width: 100%;
 	display: flex;
-	justify-content: flex-end;
-	margin: 0 auto;
+	justify-content: space-between;
+	min-height: 30px;
+}
+
+.mute {
 	cursor: pointer;
+}
+
+.view {
+	max-width: 100%;
+	max-height: 100%;
+	border: 1px solid rgb(255, 255, 255);
 }
 
 table {
@@ -91,4 +101,11 @@ tr {
 
 th, td {
 	border: 1px solid black;
+}
+
+td {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 20px;
 }

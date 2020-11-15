@@ -41,6 +41,7 @@ export default class Cell  {
 				this.puzzle.layout.movementsElement.textContent = this.puzzle.movements;
 				this.sound.currentTime = 0;
 				this.sound.play();
+				this.puzzle.win();
 			}
 	}
 
@@ -83,7 +84,7 @@ export default class Cell  {
 			this.isEmpty = true;
 			return;
 		}
-		this.div.style.border = "1px solid #fff";
+		// this.div.style.border = "1px solid rgb(80 80 80)";
 		this.div.style.cursor = "pointer";
 		const {x, y} = this.getXY(this.index);
 		const left = this.size * x;

@@ -2,6 +2,7 @@ import Gem from "./Gem";
 
 export default class Layout {
 	constructor() {
+		// localStorage.clear();
 		this.body = document.querySelector('body');
 		this.main = this.createMain();
 		this.mainWrapper = this.createMainWrapper();
@@ -12,14 +13,52 @@ export default class Layout {
 		this.movementsElement = this.createMovementsElement();
 		this.exit = this.createExit();
 		this.head = this.createHead();
+		this.foot = this.createFootElement();
 		this.muteElement = this.createMuteElement();
+		this.viewImgElement = this.createviewImgElement();
+		this.ViewImgButton = this.createViewImgButton();
 		this.tableData = [];
 		this.topTableElement = this.createtopTableElement();
-		// this.viewImgElement = this.createviewImgElement();
 		this.bindTriggers();
 	}
 
 	//------------------layouts-------------------
+
+	createViewImgButton() {
+		const btn = document.createElement("button");
+		btn.classList.add("viewImg");
+		btn.innerHTML = this.createIconHTML("image");
+		this.foot.appendChild(btn);
+		return btn;
+	}
+
+	createviewImgElement() {
+		const img = document.createElement("img");
+		img.classList.add("view");
+		img.style.display = "none";
+		this.mainWrapper.appendChild(img);
+		return img;
+	}
+	
+	createMuteElement() {
+		const audio = document.createElement("audio");
+		audio.src = "./assets/sound.mp3";
+		this.audio = audio;
+		this.body.appendChild(audio);
+		const muteElem = document.createElement("button");
+		muteElem.innerHTML = this.createIconHTML("volume_up");
+		muteElem.classList.add("mute");
+		this.foot.appendChild(muteElem);
+		return muteElem;
+	}
+	
+	createFootElement() {
+		const foot = document.createElement("div")
+		foot.classList.add("foot");
+		foot.style.display = "none";
+		this.main.appendChild(foot);
+		return foot;
+	}
 
 	createtopTableElement() {
 		const tableElem = document.createElement("table");
@@ -30,11 +69,9 @@ export default class Layout {
 			for(let j = 0; j < 4; j++) {
 				const td = document.createElement("td");
 				const th = document.createElement("th");
-				if (i === 0 || j === 0) {
-					th.textContent = i === 0 ? headings[j] : null;
+				if (i === 0) {
+					th.textContent = headings[j];
 					tr.appendChild(th);
-
-
 				} else {
 					this.tableData[i].push(td);
 					tr.appendChild(td);
@@ -46,19 +83,6 @@ export default class Layout {
 		tableElem.style.display = "none";
 		this.startMenu.appendChild(tableElem);
 		return tableElem;
-	}
-
-	createMuteElement() {
-		const audio = document.createElement("audio");
-		audio.src = "./assets/sound.mp3";
-		this.audio = audio;
-		this.body.appendChild(audio);
-		const muteElem = document.createElement("div");
-		muteElem.innerHTML = this.createIconHTML("volume_up");
-		muteElem.classList.add("mute");
-		this.main.appendChild(muteElem);
-		muteElem.style.display = "none";
-		return muteElem;
 	}
 
 	createMovementsElement() {
@@ -136,6 +160,20 @@ export default class Layout {
 
 	// ---------------- Handlers --------------------
 	
+	viewImgHandler() {
+		if (window.getComputedStyle(this.viewImgElement).display === "none") {
+			try {
+				this.puzzle.wrapper.style.display = "none";
+			} catch(e) {};
+			this.viewImgElement.style.display = "";
+			this.ViewImgButton.innerHTML = this.createIconHTML("grid_on");
+		} else {
+			this.puzzle.wrapper.style.display = "";
+			this.viewImgElement.style.display = "none";
+			this.ViewImgButton.innerHTML = this.createIconHTML("image");			
+		}
+	}
+
 	newGameHandler() {
 		this.hideBtns(this.startButtons);
 		this.showBtns(this.sizeButtons);
@@ -145,37 +183,45 @@ export default class Layout {
 		this.startMenu.style.display = "none";
 		this.movementsElement.textContent = "";
 		this.puzzle = new Gem(this, +size[0]);
+		this.viewImgElement.src = this.puzzle.imgSrc;
 		this.puzzle.setupNew();
 		this.head.style.display = "";
-		this.muteElement.style.display = "";
+		this.foot.style.display = "";
 		this.showtime();
 	}
+
+	/**/
 	
 	continueHandler() {
 		this.startMenu.style.display = "none";
-		this.puzzle = new Gem(this, +localStorage.dim, {
-			imgSrc: localStorage.imgSrc,
-			cellsIndexes: localStorage.cellsIndexes.split(",").map(index => +index),
-			movements: +localStorage.movements,
-			timer: {min: +localStorage.min, sec: +localStorage.sec}
+		const save = JSON.parse(localStorage.save);
+		this.puzzle = new Gem(this, save.dim, {
+			imgSrc: save.imgSrc,
+			cellsIndexes: save.cellsIndexes,
+			movements: save.movements,
+			timer: {min: save.min, sec: save.sec}
 		});
+		this.viewImgElement.src = this.puzzle.imgSrc;
 		this.puzzle.setupContinue();
 		this.showtime();
 		this.head.style.display = "";
-		this.muteElement.style.display = "";
+		this.foot.style.display = "";
 	}
 
 	exitHandler() {
 		this.stopGame();
 		try {
 			this.puzzle.wrapper.remove();
+			this.puzzle.winElement.remove();
 		} catch(e) {}
 		this.head.style.display = "none";
+		this.foot.style.display = "none";
+		this.viewImgHandler();
+		this.viewImgElement.style.display = "none";
 		this.hideBtns(this.sizeButtons);
 		this.showBtns(this.startButtons);
 		this.startMenu.style.display = "";
-		this.muteElement.style.display = "none";
-		this.topTableElement.style.display = "none";
+		this.hideTableElement();
 	}
 	
 	showBtns(btns) {
@@ -205,21 +251,30 @@ export default class Layout {
 	}
 
 	soundToggle() {
-		if (this.muteElement.querySelector(".material-icons").textContent === "volume_up") {
-			this.muteElement.innerHTML = this.createIconHTML("volume_off");
-			this.audio.muted = true;
-		} else {
+		if (this.audio.muted) {
 			this.muteElement.innerHTML = this.createIconHTML("volume_up");
 			this.audio.muted = false;
+		} else {
+			this.muteElement.innerHTML = this.createIconHTML("volume_off");
+			this.audio.muted = true;
 		}
 	}
 
 	topHandler() {
 		this.hideBtns(this.startButtons);
-		this.showTableElement();
 		this.head.style.display = "";
 		this.timerElement.textContent = "";
 		this.movementsElement.textContent = "";
+		this.foot.style.display = "none";
+		this.tableData.forEach((score, i , data) => {
+			if (JSON.parse(localStorage.score)[i]) {
+				score[0].textContent = JSON.parse(localStorage.score)[i].name;
+				score[1].textContent = `${JSON.parse(localStorage.score)[i].size}x${JSON.parse(localStorage.score)[i].size}`;
+				score[2].textContent = JSON.parse(localStorage.score)[i].moves;
+				score[3].textContent = `${JSON.parse(localStorage.score)[i].time.min}:${JSON.parse(localStorage.score)[i].time.sec}`;
+			}
+		})
+		this.showTableElement();
 	}
 
 	showTableElement() {
@@ -252,6 +307,9 @@ export default class Layout {
 		});
 		this.startButtons["top-10"].addEventListener("click", () => {
 			this.topHandler();
+		});
+		this.ViewImgButton.addEventListener("click", () => {
+			this.viewImgHandler();
 		})
 	}
 }

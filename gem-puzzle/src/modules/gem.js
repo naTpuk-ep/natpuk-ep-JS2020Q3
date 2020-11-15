@@ -24,10 +24,19 @@ export default class Gem {
 		winElem.classList.add("win");
 		const nameInput = document.createElement("input");
 		nameInput.type = "text";
-		nameInput.oninput = (e) => {
-			console.log(e);
-			this.nameInputHandler(e);
-		}
+		["input", "keydown"].forEach(event => {
+			nameInput.addEventListener(event, (e) => {
+				this.topReset(e);
+			})
+		});
+		// nameInput.oninput = (e) => {
+		// 	this.nameInputHandler(e);
+		// };
+		// nameInput.onkeydown = (e) => {
+		// 		this.topReset();
+
+		// 	}
+		// }
 		this.nameInput = nameInput;
 		winElem.appendChild(nameInput);
 		this.mainWrapper.appendChild(winElem);
@@ -35,23 +44,50 @@ export default class Gem {
 		return winElem;
 	}
 
-	nameInputHandler(e) {
-		
+	topReset(e) {
+		if (e.type === "input") {
+			// this.nameInput
+			this.currentScore = {
+				name: e.target.value,
+				time: this.timer,
+				moves: this.movements,
+				size: this.dim,
+			};
+			console.log(this.currentScore);
+		}
+		if (e.type === "keydown" && e.key === "Enter") {
+			const score = localStorage.getItem("score") ? JSON.parse(localStorage.getItem("score")) : [];
+			score.push(this.currentScore);
+			this.sortScore(score);
+			localStorage.setItem("score", JSON.stringify(score));
+		}
+	}
+
+	sortScore(score) {
+		score.sort((a, b) => {
+			const sizeK = c => 1 + (c.size - 4) * 0.25;
+			const res = c => sizeK(c) * (1 / (c.moves * (c.time.sec + c.time.min * 60)));
+			return res(b) - res(a);
+		})
 	}
 	
 	win() {
+		this.layout.head.style.display = "none";
+		this.layout.foot.style.display = "none";
 		console.log("good");
+
 		this.layout.stopGame();
 		this.wrapper.remove();
-		this.winElement.style.display = "none";
+		this.winElement.style.display = "";
+		this.nameInput.focus();
 		// const nickName = 
 		// const score = [this.]
-		localStorage.clear();
+		localStorage.removeItem("save");
 	}
 
 	getSize() {
-		console.log(this.wrapper);
-		return 300;
+		const wrapperSize = window.getComputedStyle(this.wrapper).width;
+		return parseFloat(wrapperSize);
 	}
 
 	saveGame() {
@@ -63,9 +99,7 @@ export default class Gem {
 			sec: this.timer.sec,
 			imgSrc: this.imgSrc,
 		};
-		for(let key in this.save) {
-			localStorage.setItem(key, this.save[key]);
-		}
+		localStorage.setItem("save", JSON.stringify(this.save));
 	}
 
 	setTimer() {
@@ -125,7 +159,7 @@ export default class Gem {
 	}
 
 	setupNew() {
-		localStorage.clear();
+		localStorage.removeItem("save");
 		for (let i = 0; i < this.dim**2; i++) {
 			this.cells.push(new Cell(this, i));
 			this.bindDrop(this.cells[i]);
