@@ -1,3 +1,4 @@
-export const randomImage = () => {
-	return `./assets/img/${Math.floor(Math.random() * 151)}.jpg`;
+export function randomImage() {
+	const img = `./assets/img/${Math.ceil(Math.random() * 150)}.jpg`;
+	return  img !== localStorage.imgSrc ? img : randomImage();
 };

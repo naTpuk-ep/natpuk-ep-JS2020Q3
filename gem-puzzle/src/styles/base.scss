@@ -20,6 +20,7 @@ button {
 
 main {
 	display: flex;
+	flex-direction: column;
 }
 
 header {
@@ -63,4 +64,24 @@ header {
 	justify-content: flex-end;
 	margin: 0 auto;
 	cursor: pointer;
+}
+
+table {
+	display: grid;
+	grid-template-rows: repeat(11, 1fr);
+	height: 100%;
+	width: 100%;
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+tr {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	height: 100%;
+	width: 100%;
+}
+
+th, td {
+	border: 1px solid black;
 }

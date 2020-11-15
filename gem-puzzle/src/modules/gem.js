@@ -10,7 +10,7 @@ export default class Gem {
 		this.size = 300;
 		this.main = document.querySelector("main");
 		this.wrapper = this.createWrapper();
-		this.main.appendChild(this.wrapper);
+		this.main.prepend(this.wrapper);
 		this.cells = [];
 		this.cellsIndexes = save.cellsIndexes;
 		this.movements = save.movements;

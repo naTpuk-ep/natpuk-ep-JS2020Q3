@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "npx webpack --mode development",
     "build": "npx webpack --mode production",
-    "start": "webpack-dev-server --mode development --open"
+    "start": "webpack-dev-server --mode development"
   },
   "keywords": [],
   "author": "",
@@ -24,5 +24,8 @@
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "open": "^7.3.0"
   }
 }

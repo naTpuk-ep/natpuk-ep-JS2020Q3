@@ -5,8 +5,8 @@ function ImageExist(url) {
 }
 
 async function imgImport() {
-	for (let i = 1; ImageExist(`../assets/img/${i}.jpg`); i++){
-		await import(`../assets/img/${i}.jpg`)
+	for (let i = 1; ImageExist(`../assets/img/box/${i}.jpg`); i++){
+		await import(`../assets/img/box/${i}.jpg`)
 			.catch(err => {
 				console.error('import ERROR: ', err);
 			})
