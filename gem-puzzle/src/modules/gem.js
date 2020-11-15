@@ -7,15 +7,51 @@ export default class Gem {
 		this.layout = layout;
 		this.dim = dim;
 		this.imgSrc = save.imgSrc;
-		this.size = 300;
-		this.main = document.querySelector("main");
+		this.mainWrapper = this.layout.mainWrapper;
 		this.wrapper = this.createWrapper();
-		this.main.prepend(this.wrapper);
+		this.mainWrapper.prepend(this.wrapper);
+		this.size = this.getSize();
 		this.cells = [];
 		this.cellsIndexes = save.cellsIndexes;
 		this.movements = save.movements;
 		this.timer = save.timer;
 		this.setTimer();
+		this.winElement = this.createWinElement();
+	}
+
+	createWinElement() {
+		const winElem = document.createElement("div");
+		winElem.classList.add("win");
+		const nameInput = document.createElement("input");
+		nameInput.type = "text";
+		nameInput.oninput = (e) => {
+			console.log(e);
+			this.nameInputHandler(e);
+		}
+		this.nameInput = nameInput;
+		winElem.appendChild(nameInput);
+		this.mainWrapper.appendChild(winElem);
+		winElem.style.display = "none";
+		return winElem;
+	}
+
+	nameInputHandler(e) {
+		
+	}
+	
+	win() {
+		console.log("good");
+		this.layout.stopGame();
+		this.wrapper.remove();
+		this.winElement.style.display = "none";
+		// const nickName = 
+		// const score = [this.]
+		localStorage.clear();
+	}
+
+	getSize() {
+		console.log(this.wrapper);
+		return 300;
 	}
 
 	saveGame() {
@@ -63,9 +99,7 @@ export default class Gem {
 		this.cells[i].setPosition(i);
 		this.cells[j].setPosition(j);
 		if (this.isAssambled()) {
-			console.log("good");
-			this.layout.stopGame();
-			localStorage.clear();
+			this.win();
 		}
 	}
 

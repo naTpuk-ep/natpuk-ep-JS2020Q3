@@ -4,14 +4,15 @@ export default class Layout {
 	constructor() {
 		this.body = document.querySelector('body');
 		this.main = this.createMain();
+		this.mainWrapper = this.createMainWrapper();
 		this.startMenu = this.createStartMenu();
 		this.startButtons = this.createButtons(["NEW GAME", "CONTINUE", "TOP 10"]);
 		this.sizeButtons = this.createButtons(["3x3", "4x4", "5x5", "6x6", "7x7", "8x8"]);
 		this.timerElement = this.createTimerElement();
 		this.movementsElement = this.createMovementsElement();
 		this.exit = this.createExit();
-		this.header = this.createHeader();
-		this.muteElement = this.createSound();
+		this.head = this.createHead();
+		this.muteElement = this.createMuteElement();
 		this.tableData = [];
 		this.topTableElement = this.createtopTableElement();
 		// this.viewImgElement = this.createviewImgElement();
@@ -22,7 +23,7 @@ export default class Layout {
 
 	createtopTableElement() {
 		const tableElem = document.createElement("table");
-		const headings = ["", "SIZE" ,"MOVES", "TIME"]
+		const headings = ["NICK", "SIZE" ,"MOVES", "TIME"]
 		for (let i = 0; i < 11; i++) {
 			const tr = document.createElement("tr");
 			this.tableData[i] = [];
@@ -35,7 +36,6 @@ export default class Layout {
 
 
 				} else {
-					// td = 
 					this.tableData[i].push(td);
 					tr.appendChild(td);
 				}
@@ -45,11 +45,10 @@ export default class Layout {
 		this.tableData.shift();
 		tableElem.style.display = "none";
 		this.startMenu.appendChild(tableElem);
-		console.log(this.tableData);
 		return tableElem;
 	}
 
-	createSound() {
+	createMuteElement() {
 		const audio = document.createElement("audio");
 		audio.src = "./assets/sound.mp3";
 		this.audio = audio;
@@ -90,14 +89,15 @@ export default class Layout {
 		return this.timerElement;
 	}
 
-	createHeader() {
-		const header = document.createElement("header");
-		header.appendChild(this.timerElement);
-		header.appendChild(this.movementsElement);
-		header.appendChild(this.exit);
-		header.style.display = "none";
-		this.body.prepend(header);
-		return header;
+	createHead() {
+		const head = document.createElement("div");
+		head.classList.add("head");
+		head.appendChild(this.timerElement);
+		head.appendChild(this.movementsElement);
+		head.appendChild(this.exit);
+		head.style.display = "none";
+		this.main.prepend(head);
+		return head;
 	}
 
 	createExit() {
@@ -111,11 +111,18 @@ export default class Layout {
 		this.body.prepend(main);
 		return main;
 	}
+	
+	createMainWrapper() {
+		const wrapper = document.createElement("div");
+		wrapper.classList.add("main-wrapper");
+		this.main.prepend(wrapper);
+		return wrapper;
+	}
 
 	createStartMenu() {
 		const startMenu = document.createElement('div');
 		startMenu.classList.add('start-menu');
-		this.main.appendChild(startMenu);
+		this.mainWrapper.appendChild(startMenu);
 		return startMenu;
 	}
 	
@@ -139,7 +146,7 @@ export default class Layout {
 		this.movementsElement.textContent = "";
 		this.puzzle = new Gem(this, +size[0]);
 		this.puzzle.setupNew();
-		this.header.style.display = "";
+		this.head.style.display = "";
 		this.muteElement.style.display = "";
 		this.showtime();
 	}
@@ -154,18 +161,21 @@ export default class Layout {
 		});
 		this.puzzle.setupContinue();
 		this.showtime();
-		this.header.style.display = "";
+		this.head.style.display = "";
 		this.muteElement.style.display = "";
 	}
 
 	exitHandler() {
 		this.stopGame();
-		this.puzzle.wrapper.remove();
-		this.header.style.display = "none";
+		try {
+			this.puzzle.wrapper.remove();
+		} catch(e) {}
+		this.head.style.display = "none";
 		this.hideBtns(this.sizeButtons);
 		this.showBtns(this.startButtons);
 		this.startMenu.style.display = "";
 		this.muteElement.style.display = "none";
+		this.topTableElement.style.display = "none";
 	}
 	
 	showBtns(btns) {
@@ -188,8 +198,10 @@ export default class Layout {
 	}
 
 	stopGame() {
-		clearTimeout(this.puzzle.timerId);
-		clearTimeout(this.timerId);
+		try {
+			clearTimeout(this.puzzle.timerId);
+			clearTimeout(this.timerId);
+		} catch(e) {}
 	}
 
 	soundToggle() {
@@ -204,7 +216,10 @@ export default class Layout {
 
 	topHandler() {
 		this.hideBtns(this.startButtons);
-		this.showTableElement(); //---------
+		this.showTableElement();
+		this.head.style.display = "";
+		this.timerElement.textContent = "";
+		this.movementsElement.textContent = "";
 	}
 
 	showTableElement() {
