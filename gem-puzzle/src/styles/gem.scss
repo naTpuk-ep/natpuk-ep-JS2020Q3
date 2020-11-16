@@ -1,4 +1,7 @@
 $wrapperWidth: 300px;
+$bgcolor: #1c1c1c;
+$color: transparentize(crimson, .5);
+$transparent: rgba(0, 0, 0, 0);
 
 .gem-wrapper{
 	width: $wrapperWidth;
@@ -6,13 +9,21 @@ $wrapperWidth: 300px;
 	display: flex;
 	margin: auto auto;
 	position: relative;
-
+	// background: linear-gradient(
+  //     $transparent 60%, 
+  //     $color 60%
+  //     ),
+  //   linear-gradient(90deg,
+  //     $transparent 60%, 
+  //     $color 60%
+  //     );
+  // background-size: $wrapperWidth/4 $wrapperWidth/4;
+  // background-color: $bgcolor;
+  // background-position: center 1em;
 }
 
-.cell{
+.cell {
 	position: absolute;
-	transition: all ease-in-out .2s;
-	box-shadow: 0 0 20px 3px black;
-	
+	transition: all ease-in-out 0.2s;
 }
 

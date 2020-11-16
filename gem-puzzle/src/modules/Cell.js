@@ -9,6 +9,7 @@ export default class Cell  {
 		puzzle.wrapper.appendChild(this.div);
 		this.setImage();
 		this.setPosition(this.index);
+		this.positionOuter(this.index);
 		this.sound = document.querySelector("audio");
 	}
 
@@ -41,7 +42,7 @@ export default class Cell  {
 				this.puzzle.layout.movementsElement.textContent = this.puzzle.movements;
 				this.sound.currentTime = 0;
 				this.sound.play();
-				this.puzzle.win();
+				// this.puzzle.win();
 			}
 	}
 
@@ -62,6 +63,8 @@ export default class Cell  {
 		div.style.width = `${this.size}px`;
 		div.style.height = `${this.size}px`;
 		div.draggable = "true";
+		div.style.boxShadow = `0 0 ${20 / this.puzzle.dim}px 1px black`;
+		div.style.display = "none";
 		return div;
 	}
 
@@ -75,8 +78,28 @@ export default class Cell  {
 
 	setPosition(index) {
 		const {left, top} = this.getPosition(index);
+
 		this.div.style.left = `${left}px`;
 		this.div.style.top = `${top}px`;
+		
+	}
+
+	positionOuter(index) {
+		const {left, top} = this.getPosition(index);
+		const {x, y} = this.getXY(index);
+		const centrX = x - (this.puzzle.dim - 1) / 2;
+		const centrY = y - (this.puzzle.dim - 1) / 2;
+		if (this.index === this.puzzle.dim ** 2 - 1) {
+			this.div.style.boxShadow = "none";
+		}
+		setTimeout(() => {
+			this.div.style.display = "";
+			setTimeout(() => {
+				this.div.style.left = `${left + centrX * 20 / this.puzzle.dim}px`;
+				this.div.style.top = `${top + centrY * 20 / this.puzzle.dim}px`;
+			})
+		});
+		
 	}
 
 	setImage() {
@@ -84,7 +107,6 @@ export default class Cell  {
 			this.isEmpty = true;
 			return;
 		}
-		// this.div.style.border = "1px solid rgb(80 80 80)";
 		this.div.style.cursor = "pointer";
 		const {x, y} = this.getXY(this.index);
 		const left = this.size * x;

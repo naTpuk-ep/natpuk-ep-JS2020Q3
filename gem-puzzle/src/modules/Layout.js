@@ -9,6 +9,7 @@ export default class Layout {
 		this.startMenu = this.createStartMenu();
 		this.startButtons = this.createButtons(["NEW GAME", "CONTINUE", "TOP 10"]);
 		this.sizeButtons = this.createButtons(["3x3", "4x4", "5x5", "6x6", "7x7", "8x8"]);
+		this.showBtns(this.startButtons);
 		this.timerElement = this.createTimerElement();
 		this.movementsElement = this.createMovementsElement();
 		this.exit = this.createExit();
@@ -55,14 +56,14 @@ export default class Layout {
 	createFootElement() {
 		const foot = document.createElement("div")
 		foot.classList.add("foot");
-		foot.style.display = "none";
+		foot.style.opacity = 0;
 		this.main.appendChild(foot);
 		return foot;
 	}
 
 	createtopTableElement() {
 		const tableElem = document.createElement("table");
-		const headings = ["NICK", "SIZE" ,"MOVES", "TIME"]
+		const headings = ["NAME", "SIZE" ,"MOVES", "TIME"]
 		for (let i = 0; i < 11; i++) {
 			const tr = document.createElement("tr");
 			this.tableData[i] = [];
@@ -104,7 +105,6 @@ export default class Layout {
 			button.style.display = "none";
 		})
 		this.startMenu.appendChild(startUl);
-		this.showBtns(this.startButtons);
 		return buttons;
 	}
 	
@@ -119,7 +119,7 @@ export default class Layout {
 		head.appendChild(this.timerElement);
 		head.appendChild(this.movementsElement);
 		head.appendChild(this.exit);
-		head.style.display = "none";
+		head.style.opacity = 0;
 		this.main.prepend(head);
 		return head;
 	}
@@ -185,12 +185,10 @@ export default class Layout {
 		this.puzzle = new Gem(this, +size[0]);
 		this.viewImgElement.src = this.puzzle.imgSrc;
 		this.puzzle.setupNew();
-		this.head.style.display = "";
-		this.foot.style.display = "";
+		this.head.style.opacity = 1;
+		this.foot.style.opacity = 1;
 		this.showtime();
 	}
-
-	/**/
 	
 	continueHandler() {
 		this.startMenu.style.display = "none";
@@ -204,8 +202,8 @@ export default class Layout {
 		this.viewImgElement.src = this.puzzle.imgSrc;
 		this.puzzle.setupContinue();
 		this.showtime();
-		this.head.style.display = "";
-		this.foot.style.display = "";
+		this.head.style.opacity = 1;
+		this.foot.style.opacity = 1;
 	}
 
 	exitHandler() {
@@ -214,20 +212,24 @@ export default class Layout {
 			this.puzzle.wrapper.remove();
 			this.puzzle.winElement.remove();
 		} catch(e) {}
-		this.head.style.display = "none";
-		this.foot.style.display = "none";
+		this.head.style.opacity = 0;
+		this.foot.style.opacity = 0;
 		this.viewImgHandler();
 		this.viewImgElement.style.display = "none";
 		this.hideBtns(this.sizeButtons);
 		this.showBtns(this.startButtons);
 		this.startMenu.style.display = "";
 		this.hideTableElement();
+		this.mainWrapper.classList.remove("no-shadow");
 	}
 	
 	showBtns(btns) {
 		for (let key in btns) {
 			btns[key].style.display = "";
 		}
+		try {
+			btns["continue"].disabled = localStorage.save ? false : true;
+		} catch(e) {}
 	}
 
 	hideBtns(btns) {
@@ -262,19 +264,21 @@ export default class Layout {
 
 	topHandler() {
 		this.hideBtns(this.startButtons);
-		this.head.style.display = "";
+		this.hideBtns(this.sizeButtons);
 		this.timerElement.textContent = "";
 		this.movementsElement.textContent = "";
-		this.foot.style.display = "none";
+		this.head.style.opacity = 1;
+		this.foot.style.opacity = 0;
 		this.tableData.forEach((score, i , data) => {
-			if (JSON.parse(localStorage.score)[i]) {
+			if (localStorage.score && JSON.parse(localStorage.score)[i]) {
 				score[0].textContent = JSON.parse(localStorage.score)[i].name;
 				score[1].textContent = `${JSON.parse(localStorage.score)[i].size}x${JSON.parse(localStorage.score)[i].size}`;
 				score[2].textContent = JSON.parse(localStorage.score)[i].moves;
-				score[3].textContent = `${JSON.parse(localStorage.score)[i].time.min}:${JSON.parse(localStorage.score)[i].time.sec}`;
+				score[3].textContent = `${this.addZero(JSON.parse(localStorage.score)[i].time.min)}:${this.addZero(JSON.parse(localStorage.score)[i].time.sec)}`;
 			}
 		})
 		this.showTableElement();
+		this.startMenu.style.display = "";
 	}
 
 	showTableElement() {

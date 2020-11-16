@@ -17,6 +17,8 @@ export default class Gem {
 		this.timer = save.timer;
 		this.setTimer();
 		this.winElement = this.createWinElement();
+		this.mainWrapper.classList.add("no-shadow");
+		this.layout.ViewImgButton.innerHTML = this.layout.createIconHTML("image");	
 	}
 
 	createWinElement() {
@@ -29,15 +31,8 @@ export default class Gem {
 				this.topReset(e);
 			})
 		});
-		// nameInput.oninput = (e) => {
-		// 	this.nameInputHandler(e);
-		// };
-		// nameInput.onkeydown = (e) => {
-		// 		this.topReset();
-
-		// 	}
-		// }
 		this.nameInput = nameInput;
+		winElem.innerHTML = "<p>GOOD JOB!</p><p>Enter your name</p>"
 		winElem.appendChild(nameInput);
 		this.mainWrapper.appendChild(winElem);
 		winElem.style.display = "none";
@@ -46,42 +41,38 @@ export default class Gem {
 
 	topReset(e) {
 		if (e.type === "input") {
-			// this.nameInput
 			this.currentScore = {
 				name: e.target.value,
 				time: this.timer,
 				moves: this.movements,
 				size: this.dim,
 			};
-			console.log(this.currentScore);
 		}
 		if (e.type === "keydown" && e.key === "Enter") {
 			const score = localStorage.getItem("score") ? JSON.parse(localStorage.getItem("score")) : [];
 			score.push(this.currentScore);
 			this.sortScore(score);
 			localStorage.setItem("score", JSON.stringify(score));
+			this.winElement.style.display = "none";
+			this.layout.topHandler.call(this.layout);
 		}
 	}
 
 	sortScore(score) {
 		score.sort((a, b) => {
-			const sizeK = c => 1 + (c.size - 4) * 0.25;
-			const res = c => sizeK(c) * (1 / (c.moves * (c.time.sec + c.time.min * 60)));
+			const res = c => c.size * (1 / (c.moves * (c.time.sec + c.time.min * 60)));
 			return res(b) - res(a);
 		})
 	}
 	
 	win() {
-		this.layout.head.style.display = "none";
-		this.layout.foot.style.display = "none";
-		console.log("good");
-
+		this.mainWrapper.classList.remove("no-shadow");
+		this.layout.head.style.opacity = 0;
+		this.layout.foot.style.opacity = 0;
 		this.layout.stopGame();
 		this.wrapper.remove();
 		this.winElement.style.display = "";
 		this.nameInput.focus();
-		// const nickName = 
-		// const score = [this.]
 		localStorage.removeItem("save");
 	}
 
@@ -131,10 +122,14 @@ export default class Gem {
 	swap(i, j) {
 		[this.cells[i], this.cells[j]] = [this.cells[j], this.cells[i]];
 		this.cells[i].setPosition(i);
+		this.cells[i].positionOuter(i);
 		this.cells[j].setPosition(j);
-		if (this.isAssambled()) {
-			this.win();
-		}
+		this.cells[j].positionOuter(j);
+		setTimeout(() => {
+			if (this.isAssambled()) {
+				this.win();
+			}
+		})
 	}
 
 	isAssambled() {
@@ -174,6 +169,7 @@ export default class Gem {
 		}
 		for (let i = 0; i < this.cells.length; i++) {
 			this.cells[i].setPosition(i);
+			this.cells[i].positionOuter(i);
 		}
 		this.layout.movementsElement.textContent = this.movements;
 	}
