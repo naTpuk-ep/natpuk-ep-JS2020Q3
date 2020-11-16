@@ -9,4 +9,5 @@ window.addEventListener("load", () => {
 });
 
 
-import "./autoCloser";
+
+// import "./autoCloser"; // autoclose when dev-server is stoped

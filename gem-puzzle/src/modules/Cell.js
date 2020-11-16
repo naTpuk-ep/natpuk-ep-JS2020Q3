@@ -42,7 +42,6 @@ export default class Cell  {
 				this.puzzle.layout.movementsElement.textContent = this.puzzle.movements;
 				this.sound.currentTime = 0;
 				this.sound.play();
-				// this.puzzle.win();
 			}
 	}
 
@@ -97,7 +96,7 @@ export default class Cell  {
 			setTimeout(() => {
 				this.div.style.left = `${left + centrX * 20 / this.puzzle.dim}px`;
 				this.div.style.top = `${top + centrY * 20 / this.puzzle.dim}px`;
-			})
+			},100)
 		});
 		
 	}

@@ -32,8 +32,6 @@ export default class Gem {
 			})
 		});
 		this.nameInput = nameInput;
-		winElem.innerHTML = "<p>GOOD JOB!</p><p>Enter your name</p>"
-		winElem.appendChild(nameInput);
 		this.mainWrapper.appendChild(winElem);
 		winElem.style.display = "none";
 		return winElem;
@@ -71,6 +69,8 @@ export default class Gem {
 		this.layout.foot.style.opacity = 0;
 		this.layout.stopGame();
 		this.wrapper.remove();
+		this.winElement.innerHTML = `<p>GOOD JOB!</p><p>Time: ${this.layout.addZero(this.timer.min)}:${this.layout.addZero(this.timer.sec)}</p><p>Moves: ${this.movements}</p><p>Enter your name:</p>`;
+		this.winElement.appendChild(this.nameInput);
 		this.winElement.style.display = "";
 		this.nameInput.focus();
 		localStorage.removeItem("save");

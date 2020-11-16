@@ -1,7 +1,4 @@
 $wrapperWidth: 300px;
-$bgcolor: #1c1c1c;
-$color: transparentize(crimson, .5);
-$transparent: rgba(0, 0, 0, 0);
 
 .gem-wrapper{
 	width: $wrapperWidth;
@@ -9,17 +6,6 @@ $transparent: rgba(0, 0, 0, 0);
 	display: flex;
 	margin: auto auto;
 	position: relative;
-	// background: linear-gradient(
-  //     $transparent 60%, 
-  //     $color 60%
-  //     ),
-  //   linear-gradient(90deg,
-  //     $transparent 60%, 
-  //     $color 60%
-  //     );
-  // background-size: $wrapperWidth/4 $wrapperWidth/4;
-  // background-color: $bgcolor;
-  // background-position: center 1em;
 }
 
 .cell {
