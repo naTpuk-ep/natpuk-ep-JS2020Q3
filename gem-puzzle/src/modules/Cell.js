@@ -77,7 +77,6 @@ export default class Cell  {
 
 	setPosition(index) {
 		const {left, top} = this.getPosition(index);
-
 		this.div.style.left = `${left}px`;
 		this.div.style.top = `${top}px`;
 		
@@ -91,13 +90,13 @@ export default class Cell  {
 		if (this.index === this.puzzle.dim ** 2 - 1) {
 			this.div.style.boxShadow = "none";
 		}
-		setTimeout(() => {
-			this.div.style.display = "";
-			setTimeout(() => {
-				this.div.style.left = `${left + centrX * 20 / this.puzzle.dim}px`;
-				this.div.style.top = `${top + centrY * 20 / this.puzzle.dim}px`;
-			},100)
-		});
+		this.div.style.display = "";
+		this.div.style.left = `${left + centrX * 20 / this.puzzle.dim}px`;
+		this.div.style.top = `${top + centrY * 20 / this.puzzle.dim}px`;
+		// setTimeout(() => {
+		// 	setTimeout(() => {
+		// 	})
+		// });
 		
 	}
 
