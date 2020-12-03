@@ -2,6 +2,8 @@ body {
 	background: #212121;
 	margin: 0;
 	padding: 0;
+	font-family: Roboto;
+	font-size: 24px;
 }
 
 * {
@@ -10,18 +12,26 @@ body {
 }
 
 .container {
-	max-width: 1240px;
+	max-width: 1600px;
 	margin: 0 auto;
 }
 
 .main-wrapper {
 	width: 100%;
-	display: grid;
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: center;
 }
 
 .card {
 	width: 300px;
-	height: 300px;
+	height: 250px;
+	margin: 20px;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	text-align: center;
+	box-shadow: 0 0 20px 0 black;
+	padding-bottom: 10px;
 }
