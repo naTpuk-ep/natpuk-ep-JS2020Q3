@@ -1,10 +1,12 @@
-import CategoryCard from './Card';
+import Card from './Card';
 import cardsInfo from './cardsInfo';
 
 export default class MainCards {
-	constructor (assetsPath) {
+	constructor (burgerMenu) {
+		this.burgerMenu = burgerMenu;
 		this.wrapper = document.querySelector('.main-wrapper');
-		this.assetsPath = assetsPath;
+		this.removeAll();
+		this.assetsPath = './assets';
 		this.cards = [];
 		this.cardsElems = this.initCards();
 		this.bindTriggers();
@@ -13,21 +15,21 @@ export default class MainCards {
 	bindTriggers() {
 		this.cardsElems.forEach((card, index) => {
 			card.addEventListener('click', () => {
-				this.openCategoryHandler(index);
+				this.burgerMenu.linkHandler(index + 1);
 			});
 		});
 	}
 
 	openCategoryHandler(index) {
-		this.removeCards();
+		this.removeAll();
 		cardsInfo[index + 1].forEach((card, i) => {
-			this.cards.push(new CategoryCard(index + 1, i));
+			this.cards.push(new Card(index + 1, i));
 		});
 	}
 
-	removeCards() {
-		this.cardsElems.forEach(card => {
-			card.remove();
+	removeAll() {
+		[...this.wrapper.children].forEach(el => {
+			el.remove();
 		});
 	}
 
