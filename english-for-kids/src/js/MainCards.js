@@ -21,12 +21,19 @@ export default class MainCards {
 	}
 
 	openCategoryHandler(index) {
-		if (this.mode.playMode) {
-			this.mode.showBtn();
-		}
 		this.removeAll();
 		cardsInfo[index + 1].forEach((card, i) => {
 			this.cards.push(new Card(index + 1, i));
+		});
+		if (this.mode.playMode) {
+			this.mode.showBtn();
+			this.hideDesc();
+		}
+	}
+
+	hideDesc() {
+		this.cards.forEach(card => {
+			card.cardElement.classList.toggle('play-card', this.playMode);
 		});
 	}
 
@@ -58,13 +65,12 @@ export default class MainCards {
 		});
 		
 		this.mainCardsElems = mainCards;
-		try {
-			if (this.mode.playMode) {
-				this.mainCardPlayVisualize();
+			if (this.mode) { 
+				if (this.mode.playMode) {
+					this.mainCardPlayVisualize();
+				}
 			}
-		} catch (e) {
-			console.log(e);
-		}
+
 		this.bindTriggers();
 		// return mainCards;
 	}

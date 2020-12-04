@@ -9,7 +9,7 @@ export default class Mode {
 	}
 
 	play() {
-		// console.log();
+		console.log('play');
 	}
 
 	showBtn() {
@@ -25,8 +25,8 @@ export default class Mode {
 		setTimeout(() => {
 			this.toggle.querySelector('.mode').textContent = this.toggle.querySelector('.mode').textContent.toLowerCase() === 'play' ? 'train' : 'play';
 		}, 100);
-		console.log(this.mainCards);
 		this.mainCards.mainCardPlayVisualize();
+		this.mainCards.hideDesc();
 	}
 
 	modeToggle() {

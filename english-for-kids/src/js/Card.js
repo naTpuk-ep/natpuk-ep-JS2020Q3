@@ -59,7 +59,7 @@ export default class Card {
 
 		this.rotate = rotate;
 		this.back = back;
-		
+
 		return card;
 	}
 }

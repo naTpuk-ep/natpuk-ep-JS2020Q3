@@ -1,5 +1,4 @@
 import cardsInfo from './cardsInfo.js';
-// import MainCards from './MainCards';
 
 export default class BurgerMenu {
 	constructor (menuSelector, triggerSelector) {
@@ -58,6 +57,7 @@ export default class BurgerMenu {
 		this.linkList.forEach((link, i) => {
 			link.addEventListener('click', () => {
 				this.linkHandler(i);
+				this.hide();
 			});
 		});
 	}
