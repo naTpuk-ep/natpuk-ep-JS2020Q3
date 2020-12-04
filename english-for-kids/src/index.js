@@ -1,9 +1,11 @@
 import '../autoCloser.js';
 import './index.scss';
-// import MainCards from './js/MainCards';
+import MainCards from './js/MainCards';
 import BurgerMenu from './js/burgerMenu';
+import Mode from './js/Mode';
 
+const burger = new BurgerMenu('.menu', '.burger-menu');
 
-// new MainCards();
+const mainCards = new MainCards(burger);
 
-new BurgerMenu('.menu', '.burger-menu');
+new Mode(mainCards);

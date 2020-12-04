@@ -48,16 +48,18 @@ export default class Card {
 		descB.textContent = this.tranlation;
 		let rotate = document.createElement('div');
 		rotate.classList.add('rotate-icon');
-		this.rotate = rotate;
 		descF.appendChild(rotate);
 		front.appendChild(divImgF);
 		front.appendChild(descF);
 		back.appendChild(divImgB);
 		back.appendChild(descB);
-		this.back = back;
 		card.appendChild(front);
 		card.appendChild(back);
 		this.wrapper.appendChild(card);
+
+		this.rotate = rotate;
+		this.back = back;
+		
 		return card;
 	}
 }

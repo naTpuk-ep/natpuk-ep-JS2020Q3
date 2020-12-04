@@ -1,5 +1,5 @@
 import cardsInfo from './cardsInfo.js';
-import MainCards from './MainCards';
+// import MainCards from './MainCards';
 
 export default class BurgerMenu {
 	constructor (menuSelector, triggerSelector) {
@@ -10,7 +10,6 @@ export default class BurgerMenu {
 		this.header = document.querySelector('header');
 		this.isShow = false;
 		this.linkList = this.initList();
-		this.main = new MainCards(this);
 		this.bindTriggers();
 	}
 
@@ -40,9 +39,11 @@ export default class BurgerMenu {
 		});
 		this.linkList[i].classList.add('menu__link-active');
 		if (i === 0) {
-			this.main = new MainCards(this);
+			this.main.removeAll();
+			this.main.mode.hideBtn();
+			this.main.initCards();
 		} else {
-			this.main.openCategoryHandler(i - 1);
+			this.main.openCategoryHandler(i - 1); // свойство main определяется в классе MainCards
 		}
 	}
 

@@ -4,16 +4,16 @@ import cardsInfo from './cardsInfo';
 export default class MainCards {
 	constructor (burgerMenu) {
 		this.burgerMenu = burgerMenu;
+		this.burgerMenu.main = this;
 		this.wrapper = document.querySelector('.main-wrapper');
-		this.removeAll();
+		// this.removeAll();
 		this.assetsPath = './assets';
 		this.cards = [];
-		this.cardsElems = this.initCards();
-		this.bindTriggers();
+		this.initCards();
 	}
 
 	bindTriggers() {
-		this.cardsElems.forEach((card, index) => {
+		this.mainCardsElems.forEach((card, index) => {
 			card.addEventListener('click', () => {
 				this.burgerMenu.linkHandler(index + 1);
 			});
@@ -21,6 +21,9 @@ export default class MainCards {
 	}
 
 	openCategoryHandler(index) {
+		if (this.mode.playMode) {
+			this.mode.showBtn();
+		}
 		this.removeAll();
 		cardsInfo[index + 1].forEach((card, i) => {
 			this.cards.push(new Card(index + 1, i));
@@ -31,6 +34,7 @@ export default class MainCards {
 		[...this.wrapper.children].forEach(el => {
 			el.remove();
 		});
+		this.cards = [];
 	}
 
 	initCards() {
@@ -52,6 +56,21 @@ export default class MainCards {
 			this.wrapper.appendChild(card);
 			mainCards.push(card);
 		});
-		return mainCards;
+		
+		this.mainCardsElems = mainCards;
+		try {
+			if (this.mode.playMode) {
+				this.mainCardPlayVisualize();
+			}
+		} catch (e) {
+			console.log(e);
+		}
+		this.bindTriggers();
+		// return mainCards;
+	}
+	mainCardPlayVisualize() {
+		this.mainCardsElems.forEach(el => {
+			el.classList.toggle('main-card__play');
+		});
 	}
 }
