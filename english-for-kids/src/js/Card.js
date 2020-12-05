@@ -1,7 +1,9 @@
 import cardsInfo from './cardsInfo';
 
 export default class Card {
-	constructor (catNumber, cardNumber) {
+	constructor (catNumber, cardNumber, main) {
+		this.audio = document.querySelector('audio');
+		this.main = main;
 		this.assetsPath = './assets';
 		this.img = `${this.assetsPath}/${cardsInfo[catNumber][cardNumber].image}`;
 		this.word = cardsInfo[catNumber][cardNumber].word;
@@ -21,6 +23,52 @@ export default class Card {
 				this.cardElement.classList.remove('translate');
 			}
 		});
+		this.frontImg.addEventListener('click', () => {
+			this.playHandler();
+		});
+	}
+
+	async correctHandler() {
+		this.audio.src = 'assets/audio/correct.mp3';
+		this.audio.play();
+		this.cardElement.style.transform = 'scale(0.9)';
+		this.front.style.boxShadow = '0 0 1px 0 black';
+		this.cardElement.style.filter = 'grayscale(0.8)';
+		// this.front.setAttribute("disabled", "disabled");
+		this.front.style.pointerEvents = 'none';
+		this.audio.addEventListener('ended', () => {
+			this.main.playNextHandler();
+		}, {once:true});
+	}
+
+	errorHandler() {
+		this.audio.src = 'assets/audio/error.mp3';
+		this.audio.play();
+	}
+
+	playHandler() {
+		if (this.main.mode.playMode) {
+			if (this.checkRightCard(this.main.currentCardNum)) {
+				if (this.main.shuffleArr.length > 0) {
+					this.correctHandler();
+				} else {
+					this.main.succesHandler();
+				}
+			} else {
+				this.errorHandler();
+			}
+		} else {
+			this.playCardAudio();
+		}
+	}
+
+	checkRightCard(curr) {
+		return this.main.cards.indexOf(this) === curr;
+	}
+
+	playCardAudio() {
+		this.audio.src = this.audioSrc;
+		this.audio.play();
 	}
 
 	initCard() {
@@ -58,6 +106,8 @@ export default class Card {
 		this.wrapper.appendChild(card);
 
 		this.rotate = rotate;
+		this.front = front;
+		this.frontImg = divImgF;
 		this.back = back;
 
 		return card;

@@ -1,15 +1,14 @@
+// import cardsInfo from './cardsInfo';
+
 export default class Mode {
-	constructor(mainCards) {
-		this.mainCards = mainCards;
-		this.mainCards.mode = this;
+	constructor(main) {
+		this.main = main;
+		this.main.mode = this;
 		this.toggle = document.querySelector('.toggle');
 		this.playMode = false;
 		this.startPlayBtn = this.createPlayBtn();
+		this.audio = document.querySelector('audio');
 		this.bindTriggers();
-	}
-
-	play() {
-		console.log('play');
 	}
 
 	showBtn() {
@@ -25,14 +24,14 @@ export default class Mode {
 		setTimeout(() => {
 			this.toggle.querySelector('.mode').textContent = this.toggle.querySelector('.mode').textContent.toLowerCase() === 'play' ? 'train' : 'play';
 		}, 100);
-		this.mainCards.mainCardPlayVisualize();
-		this.mainCards.hideDesc();
+		this.main.mainCardPlayVisualize();
+		this.main.hideDesc();
 	}
 
 	modeToggle() {
 		this.playMode = !this.playMode;
 		this.visualizeMode();
-		if(this.playMode && this.mainCards.cards.length > 0) {
+		if(this.playMode && this.main.cards.length > 0) {
 			this.showBtn();
 		} else {
 			this.hideBtn();
@@ -53,7 +52,11 @@ export default class Mode {
 			this.modeToggle();
 		});
 		this.startPlayBtn.addEventListener('click', () => {
-			this.play();
+			if (this.main.holdCurrent) {
+				this.main.playNextHandler();
+			} else {
+				this.main.playCurrHandler();
+			}
 		});
 	}
 

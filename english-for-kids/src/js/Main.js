@@ -1,8 +1,9 @@
 import Card from './Card';
 import cardsInfo from './cardsInfo';
 
-export default class MainCards {
+export default class Main {
 	constructor (burgerMenu) {
+		this.audio = document.querySelector('audio');
 		this.burgerMenu = burgerMenu;
 		this.burgerMenu.main = this;
 		this.wrapper = document.querySelector('.main-wrapper');
@@ -20,15 +21,53 @@ export default class MainCards {
 		});
 	}
 
+	playNextHandler() {
+		this.currentCardNum = this.shuffleArr.pop();
+		this.audio.src = 'assets/' + cardsInfo[this.catNumber][this.currentCardNum].audioSrc;
+		this.playCurrHandler();
+		this.holdCurrent = false;
+	}
+
+	playCurrHandler() {
+		this.audio.play();
+	}
+
+	succesHandler() {
+		this.audio.src = 'assets/audio/success.mp3';
+		this.audio.play();
+		this.removeAll();
+		document.querySelector('body').style.background = 'assets/img/success.jpg';
+		this.audio.addEventListener('ended', () => {
+			// this.removeAll();
+			// this.initCards();
+		}, {once:true});
+	}
+
 	openCategoryHandler(index) {
 		this.removeAll();
-		cardsInfo[index + 1].forEach((card, i) => {
-			this.cards.push(new Card(index + 1, i));
+		this.catNumber = index + 1;
+		cardsInfo[this.catNumber].forEach((card, i) => {
+			this.cards.push(new Card(this.catNumber, i, this));
 		});
 		if (this.mode.playMode) {
 			this.mode.showBtn();
 			this.hideDesc();
 		}
+		this.shuffleArr = this.createShuffleArr();
+		this.holdCurrent = true;
+		// console.log(this.shuffleArr);
+	}
+
+	createShuffleArr() {
+		let a = [];
+		for (let i = 0; i < this.cards.length; i++) {
+			a.push(i);
+		}
+		for (let i = a.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[a[i], a[j]] = [a[j], a[i]];
+		}
+		return a;
 	}
 
 	hideDesc() {
@@ -72,11 +111,12 @@ export default class MainCards {
 			}
 
 		this.bindTriggers();
-		// return mainCards;
 	}
+
 	mainCardPlayVisualize() {
 		this.mainCardsElems.forEach(el => {
 			el.classList.toggle('main-card__play');
 		});
 	}
+
 }
