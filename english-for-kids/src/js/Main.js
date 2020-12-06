@@ -10,7 +10,10 @@ export default class Main {
 		// this.removeAll();
 		this.assetsPath = './assets';
 		this.cards = [];
-		this.initCards();
+		this.categoryNameElement = document.querySelector('.category-name');
+		this.initMainCards();
+		this.raitingElement = document.querySelector('.raiting');
+		this.currScore = [];
 	}
 
 	bindTriggers() {
@@ -23,23 +26,57 @@ export default class Main {
 
 	playNextHandler() {
 		this.currentCardNum = this.shuffleArr.pop();
-		this.audio.src = 'assets/' + cardsInfo[this.catNumber][this.currentCardNum].audioSrc;
 		this.playCurrHandler();
 		this.holdCurrent = false;
 	}
 
 	playCurrHandler() {
+		this.audio.src = 'assets/' + cardsInfo[this.catNumber][this.currentCardNum].audioSrc;
 		this.audio.play();
 	}
 
-	succesHandler() {
-		this.audio.src = 'assets/audio/success.mp3';
-		this.audio.play();
+	endGameHandler() {
+		[...document.body.children].forEach(el => {
+			el.style.display = 'none';
+		});
+		let finalElement = this.createFinalElement();
 		this.removeAll();
-		document.querySelector('body').style.background = 'assets/img/success.jpg';
+		this.audio.play();
 		this.audio.addEventListener('ended', () => {
-			
+			[...document.body.children].forEach(el => {
+				el.style.display = '';
+			});
+			finalElement.remove();
+			this.initMainCards();
+			this.mode.hideBtn();
 		}, {once:true});
+	}
+
+	createFinalElement() {
+		let finalElement = document.createElement('div');
+		finalElement.classList.add('final');
+		let imgDiv = document.createElement('div');
+		finalElement.appendChild(imgDiv);
+		if(this.currScore.every(e => e)) {
+			this.success(finalElement);
+		} else {
+			this.failure(finalElement);
+		}
+		document.body.appendChild(finalElement);
+		return finalElement;
+	}
+	
+	success(div) {
+			this.audio.src = 'assets/audio/success.mp3';
+			div.classList.add('success');
+			return div;
+		}
+
+	failure(div) {
+		this.audio.src = 'assets/audio/failure.mp3';
+		div.prepend(`${this.currScore.filter(e => !e).length} errors`);
+		div.classList.add('failure');
+		return div;
 	}
 
 	openCategoryHandler(index) {
@@ -48,13 +85,14 @@ export default class Main {
 		cardsInfo[this.catNumber].forEach((card, i) => {
 			this.cards.push(new Card(this.catNumber, i, this));
 		});
+		this.categoryNameElement.textContent = cardsInfo[0][index];
 		if (this.mode.playMode) {
 			this.mode.showBtn();
 			this.hideDesc();
 		}
 		this.shuffleArr = this.createShuffleArr();
 		this.holdCurrent = true;
-		// console.log(this.shuffleArr);
+		this.mode.transformBtnToPlay();
 	}
 
 	createShuffleArr() {
@@ -75,14 +113,18 @@ export default class Main {
 		});
 	}
 
-	removeAll() {
-		[...this.wrapper.children].forEach(el => {
-			el.remove();
-		});
-		this.cards = [];
+	clearCurrScore() {
+		[...this.raitingElement.children].forEach(e => e.remove());
+		this.currScore = [];
 	}
 
-	initCards() {
+	removeAll() {
+		[...this.wrapper.children].forEach(e => e.remove());
+		this.cards = [];
+		this.clearCurrScore();
+	}
+
+	initMainCards() {
 		let mainCards = [];
 		cardsInfo[0].forEach((cat, i) => {
 			let card = document.createElement('div');
@@ -90,8 +132,8 @@ export default class Main {
 			let divImg = document.createElement('div');
 			divImg.classList.add('card__img');
 			let img = document.createElement('img');
-			let someImgOfcategory = 3;
-			img.src = `${this.assetsPath}/${cardsInfo[i + 1][someImgOfcategory].image}`;
+			let someImgOfcategoryIndex = Math.floor(Math.random() * cardsInfo[i + 1].length);
+			img.src = `${this.assetsPath}/${cardsInfo[i + 1][someImgOfcategoryIndex].image}`;
 			divImg.appendChild(img);
 			let desc = document.createElement('div');
 			desc.classList.add('card__desc');
@@ -110,6 +152,7 @@ export default class Main {
 			}
 
 		this.bindTriggers();
+		this.categoryNameElement.textContent = '';
 	}
 
 	mainCardPlayVisualize() {

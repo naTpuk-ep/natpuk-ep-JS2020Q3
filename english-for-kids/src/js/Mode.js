@@ -12,11 +12,13 @@ export default class Mode {
 	}
 
 	showBtn() {
+		this.transformBtnToPlay();
 		this.startPlayBtn.style.transform = 'scale(1)';
 	}
 
 	hideBtn() {
 		this.startPlayBtn.style.transform = 'scale(0)';
+
 	}
 
 	visualizeMode() {
@@ -34,6 +36,7 @@ export default class Mode {
 		if(this.playMode && this.main.cards.length > 0) {
 			this.showBtn();
 		} else {
+			this.main.clearCurrScore();
 			this.hideBtn();
 		}
 	}
@@ -41,11 +44,25 @@ export default class Mode {
 	createPlayBtn() {
 		let btn = document.createElement('button');
 		btn.classList.add('play-btn');
-		btn.textContent = 'Play';
+		btn.innerHTML = 'Play';
 		btn.style.transform = 'scale(0)';
 		document.querySelector('main').appendChild(btn);
 		return btn;
 	}
+
+	transformBtnToRepeat() {
+		this.startPlayBtn.classList.add('repeat-btn');
+		this.startPlayBtn.innerHTML = `<i class="material-icons">replay</i>`;
+	}
+
+	transformBtnToPlay() {
+		this.startPlayBtn.classList.remove('repeat-btn');
+		this.startPlayBtn.innerHTML = `Play`;
+	}
+
+	// createIconHTML(icon_name) {
+	// 	return `<i class="material-icons">${icon_name}</i>`;
+	// }
 
 	bindTriggers() {
 		this.toggle.addEventListener('click', () => {
@@ -57,6 +74,7 @@ export default class Mode {
 			} else {
 				this.main.playCurrHandler();
 			}
+			this.transformBtnToRepeat();
 		});
 	}
 

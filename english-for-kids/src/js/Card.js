@@ -36,22 +36,38 @@ export default class Card {
 		this.front.style.pointerEvents = 'none';
 		this.audio.addEventListener('ended', () => {
 			this.main.playNextHandler();
+			if (this.main.shuffleArr.length === 0) {
+				this.main.endGameHandler();
+			}
 		}, {once:true});
+		this.addCorrectStar();
+
+	}
+
+	addCorrectStar() {
+		let star = document.createElement('div');
+		star.classList.add('star', 'star-correct');
+		this.main.raitingElement.appendChild(star);
+		this.main.currScore.push(true);
+	}
+
+	addErrorStar() {
+		let star = document.createElement('div');
+		star.classList.add('star', 'star-error');
+		this.main.raitingElement.appendChild(star);
+		this.main.currScore.push(false);
 	}
 
 	errorHandler() {
 		this.audio.src = 'assets/audio/error.mp3';
 		this.audio.play();
+		this.addErrorStar();
 	}
 
 	playHandler() {
 		if (this.main.mode.playMode) {
 			if (this.checkRightCard(this.main.currentCardNum)) {
-				if (this.main.shuffleArr.length > 0) {
-					this.correctHandler();
-				} else {
-					this.main.succesHandler();
-				}
+				this.correctHandler();
 			} else {
 				this.errorHandler();
 			}

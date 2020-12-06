@@ -40,7 +40,7 @@ export default class BurgerMenu {
 		if (i === 0) {
 			this.main.removeAll();
 			this.main.mode.hideBtn();
-			this.main.initCards();
+			this.main.initMainCards();
 		} else {
 			this.main.openCategoryHandler(i - 1); // свойство main определяется в классе MainCards
 		}

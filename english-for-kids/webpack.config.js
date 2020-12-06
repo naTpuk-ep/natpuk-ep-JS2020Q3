@@ -10,7 +10,7 @@ module.exports = {
 		open: {
 			app: [
 				'chrome', '--user-data-dir=c:/user_data_dirs/webpack-dev-server-window',
-				'--disable-extensions-except=c:/Users/patrick/AppData/Local/Google/Chrome/User Data/Default/Extensions/eimadpbcbfnmbkopoojfekhnkhdbieeh/4.9.25_0,c:/Users/patrick/AppData/Local/Google/Chrome/User Data/Default/Extensions/dkaagdgjmgdmbnecmcefdhjekcoceebi/2.0.3.2_0,c:/Users/patrick/AppData/Local/Google/Chrome/User Data/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.10.0_0',
+				// '--disable-extensions-except=,c:/Users/patrick/AppData/Local/Google/Chrome/User Data/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.10.0_0',
 				'--window-size=710,735', '--window-position=670,0', '--auto-open-devtools-for-tabs', /*'--content-shell-hide-toolbar','--hide-scrollbars',*/  '--new-window'
 			],
 		},
