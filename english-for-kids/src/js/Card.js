@@ -18,23 +18,21 @@ export default class Card {
 		this.rotate.addEventListener('click', () => {
 			this.cardElement.classList.add('translate');
 		});
-		this.wrapper.addEventListener('mouseover', (e) => {
-			if (e.target === this.wrapper) {
-				this.cardElement.classList.remove('translate');
-			}
+		this.cardElement.addEventListener('mouseleave', () => {
+					this.cardElement.classList.remove('translate');
 		});
 		this.frontImg.addEventListener('click', () => {
 			this.playHandler();
 		});
 	}
 
-	async correctHandler() {
+	correctHandler() {
 		this.audio.src = 'assets/audio/correct.mp3';
 		this.audio.play();
 		this.cardElement.style.transform = 'scale(0.9)';
 		this.front.style.boxShadow = '0 0 1px 0 black';
 		this.cardElement.style.filter = 'grayscale(0.8)';
-		// this.front.setAttribute("disabled", "disabled");
+		this.front.setAttribute("disabled", "disabled");
 		this.front.style.pointerEvents = 'none';
 		this.audio.addEventListener('ended', () => {
 			this.main.playNextHandler();

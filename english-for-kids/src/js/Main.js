@@ -38,8 +38,7 @@ export default class Main {
 		this.removeAll();
 		document.querySelector('body').style.background = 'assets/img/success.jpg';
 		this.audio.addEventListener('ended', () => {
-			// this.removeAll();
-			// this.initCards();
+			
 		}, {once:true});
 	}
 
