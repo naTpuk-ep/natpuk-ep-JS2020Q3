@@ -35,13 +35,14 @@ export default class Card {
 		this.front.setAttribute("disabled", "disabled");
 		this.front.style.pointerEvents = 'none';
 		this.audio.addEventListener('ended', () => {
-			this.main.playNextHandler();
+
 			if (this.main.shuffleArr.length === 0) {
 				this.main.endGameHandler();
+			} else {
+				this.main.playNextHandler();
 			}
 		}, {once:true});
 		this.addCorrectStar();
-
 	}
 
 	addCorrectStar() {
