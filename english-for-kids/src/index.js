@@ -1,4 +1,5 @@
-import '../autoCloser.js';
+// import '../autoCloser.js'; dev
+
 import './index.scss';
 import Main from './js/Main';
 import BurgerMenu from './js/burgerMenu';

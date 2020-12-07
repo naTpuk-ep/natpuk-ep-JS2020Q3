@@ -5,7 +5,6 @@ export default class BurgerMenu {
 		this.menu = document.querySelector(menuSelector);
 		this.trigger = document.querySelector(triggerSelector);
 		this.filter = document.querySelector('.filter');
-		this.body = document.querySelector('body');
 		this.header = document.querySelector('header');
 		this.isShow = false;
 		this.linkList = this.initList();
@@ -19,14 +18,14 @@ export default class BurgerMenu {
 	show(){
 		this.isShow = !this.isShow;
 		this.burgerRotate();
-		this.body.style.overflow = 'hidden';
+		document.body.style.overflow = 'hidden';
 		this.filter.style.display = 'block';
 		this.menu.style.left = 0;
 	}
 
 	hide(){
 		this.filter.style.display = 'none';
-		this.body.style.overflow = '';
+		document.body.style.overflow = '';
 		this.isShow = !this.isShow;
 		this.menu.style.left = '-320px';
 		this.burgerRotate();
@@ -42,7 +41,7 @@ export default class BurgerMenu {
 			this.main.mode.hideBtn();
 			this.main.initMainCards();
 		} else {
-			this.main.openCategoryHandler(i - 1); // свойство main определяется в классе MainCards
+			this.main.openCategoryHandler(i - 1);
 		}
 	}
 

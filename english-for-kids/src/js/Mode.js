@@ -1,5 +1,3 @@
-// import cardsInfo from './cardsInfo';
-
 export default class Mode {
 	constructor(main) {
 		this.main = main;

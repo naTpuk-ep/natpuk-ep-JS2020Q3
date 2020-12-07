@@ -7,7 +7,6 @@ export default class Main {
 		this.burgerMenu = burgerMenu;
 		this.burgerMenu.main = this;
 		this.wrapper = document.querySelector('.main-wrapper');
-		// this.removeAll();
 		this.assetsPath = './assets';
 		this.cards = [];
 		this.categoryNameElement = document.querySelector('.category-name');
@@ -143,14 +142,12 @@ export default class Main {
 			this.wrapper.appendChild(card);
 			mainCards.push(card);
 		});
-		
 		this.mainCardsElems = mainCards;
 			if (this.mode) { 
 				if (this.mode.playMode) {
 					this.mainCardPlayVisualize();
 				}
 			}
-
 		this.bindTriggers();
 		this.categoryNameElement.textContent = '';
 	}
