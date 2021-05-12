@@ -22,7 +22,7 @@ export default class Mode {
 	visualizeMode() {
 		this.toggle.classList.toggle('play');
 		setTimeout(() => {
-			this.toggle.querySelector('.mode').textContent = this.toggle.querySelector('.mode').textContent.toLowerCase() === 'play' ? 'train' : 'play';
+			this.toggle.querySelector('.mode').textContent = this.toggle.querySelector('.mode').textContent.toLowerCase().trim() === 'play' ? 'train' : 'play';
 		}, 100);
 		this.main.mainCardPlayVisualize();
 		this.main.hideDesc();

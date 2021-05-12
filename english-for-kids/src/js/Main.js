@@ -95,15 +95,15 @@ export default class Main {
 	}
 
 	createShuffleArr() {
-		let a = [];
+		let arr = [];
 		for (let i = 0; i < this.cards.length; i++) {
-			a.push(i);
+			arr.push(i);
 		}
-		for (let i = a.length - 1; i > 0; i--) {
+		for (let i = arr.length - 1; i > 0; i--) {
 			const j = Math.floor(Math.random() * (i + 1));
-			[a[i], a[j]] = [a[j], a[i]];
+			[arr[i], arr[j]] = [arr[j], arr[i]];
 		}
-		return a;
+		return arr;
 	}
 
 	hideDesc() {

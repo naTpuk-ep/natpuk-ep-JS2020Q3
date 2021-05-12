@@ -7,7 +7,7 @@ export default class Card {
 		this.assetsPath = './assets';
 		this.img = `${this.assetsPath}/${cardsInfo[catNumber][cardNumber].image}`;
 		this.word = cardsInfo[catNumber][cardNumber].word;
-		this.tranlation = cardsInfo[catNumber][cardNumber].translation;
+		this.translation = cardsInfo[catNumber][cardNumber].translation;
 		this.audioSrc = `${this.assetsPath}/${cardsInfo[catNumber][cardNumber].audioSrc}`;
 		this.wrapper = document.querySelector('.main-wrapper');
 		this.cardElement = this.initCard();
@@ -95,6 +95,7 @@ export default class Card {
 		divImgF.classList.add('card__img');
 		let imgF = document.createElement('img');
 		imgF.src = this.img;
+		imgF.alt = "imgF";
 		divImgF.appendChild(imgF);
 		let back = document.createElement('div');
 		back.classList.add('back');
@@ -102,13 +103,14 @@ export default class Card {
 		divImgB.classList.add('card__img');
 		let imgB = document.createElement('img');
 		imgB.src = this.img;
+		imgB.alt = "imgB";
 		divImgB.appendChild(imgB);
 		let descF = document.createElement('div');
 		descF.classList.add('card__desc');
 		descF.textContent = this.word;
 		let descB = document.createElement('div');
 		descB.classList.add('card__desc');
-		descB.textContent = this.tranlation;
+		descB.textContent = this.translation;
 		let rotate = document.createElement('div');
 		rotate.classList.add('rotate-icon');
 		descF.appendChild(rotate);
