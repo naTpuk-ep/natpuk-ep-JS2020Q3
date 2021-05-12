@@ -22,7 +22,7 @@ button {
 	cursor: pointer;
 	transition: all ease-in-out 0.1s;
 	&:hover{
-		transform: scale(1.5);;
+		transform: scale(1.5);
 	}
 }	
 
@@ -37,7 +37,6 @@ button:disabled {
 main {
 	display: flex;
 	flex-direction: column;
-	width: 100vw;
 	height: 100vh;
 	width: 300px;
 	margin: auto auto;
